@@ -1,0 +1,10 @@
+  // data = strcat(data, dataPiutang[i].tanggal);
+        // data = strcat(data, seperator);
+        // // data = strcat(data, (char)dataPiutang[i].jumlahPiutang);
+        // data = strcat(data, seperator);
+        // // data = strcat(data, dataPiutang[i].bunga);
+        // data = strcat(data, seperator);
+        // // data = strcat(data, dataPiutang[i].sisaSaldo);
+        // data = strcat(data, seperator);
+        // // data = strcat(data, dataPiutang[i].periode);
+        // data = strcat(data, enter);

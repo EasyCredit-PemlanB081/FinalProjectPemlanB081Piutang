@@ -30,11 +30,23 @@ void makeFile(char *fileName)
 
 void writeFile(char *fileName, char *data)
 {
+
     FILE *fp;
     fp = fopen(fileName, "w"); // append
 
     fprintf(fp, "%s", data);
+    fflush(fp);
+    fclose(fp);
+}
 
+void appendFile(char *fileName, char *data)
+{
+    printf("%s", data);
+    FILE *fp;
+    fp = fopen(fileName, "a"); // append
+
+    fprintf(fp, "%s", data);
+    fflush(fp);
     fclose(fp);
 }
 
@@ -146,23 +158,46 @@ void addPiutang(Piutang p)
     sizeDataPiutang++;
 }
 
+char *piutangToText()
+{
+    for (int i = 0; i < sizeDataPiutang; i++)
+    {
+        char *data = (char *)malloc(sizeof(char) * 1000);
+    }
+}
+
+void printAllPiutang()
+{
+    int size = sizeDataPiutang;
+    for (int i = 0; i < size; i++)
+    {
+        printf("%s\n", dataPiutang[i].nama_pelanggan);
+        printf("%s\n", dataPiutang[i].tanggal);
+        printf("%f\n", dataPiutang[i].jumlahPiutang);
+        printf("%f\n", dataPiutang[i].bunga);
+        printf("%f\n", dataPiutang[i].sisaSaldo);
+        printf("%f\n\n", dataPiutang[i].periode);
+    }
+}
+
 char *savePiutang()
 {
-    char *data = "Halo";
+    char *data = "a";
+
     for (int i = 0; i < 1; i++)
     {
-        data = dataPiutang[i].nama_pelanggan;
-        data = strcat(data, seperator);
-        data = strcat(data, dataPiutang[i].tanggal);
-        data = strcat(data, seperator);
-        // data = strcat(data, (char)dataPiutang[i].jumlahPiutang);
-        data = strcat(data, seperator);
-        // data = strcat(data, dataPiutang[i].bunga);
-        data = strcat(data, seperator);
-        // data = strcat(data, dataPiutang[i].sisaSaldo);
-        data = strcat(data, seperator);
-        // data = strcat(data, dataPiutang[i].periode);
-        data = strcat(data, enter);
+        printf("%s", dataPiutang[i].nama_pelanggan);
+
+        // data = strcat(data, dataPiutang[i].tanggal);
+        // data = strcat(data, seperator);
+        // // data = strcat(data, (char)dataPiutang[i].jumlahPiutang);
+        // data = strcat(data, seperator);
+        // // data = strcat(data, dataPiutang[i].bunga);
+        // data = strcat(data, seperator);
+        // // data = strcat(data, dataPiutang[i].sisaSaldo);
+        // data = strcat(data, seperator);
+        // // data = strcat(data, dataPiutang[i].periode);
+        // data = strcat(data, enter);
     }
     return data;
 }
@@ -220,7 +255,8 @@ void formPiutang()
     p.sisaSaldo = 0;
     p.periode = periode;
     addPiutang(p);
-    writeFile("piutang.data", savePiutang());
+
+    // writeFile("piutang.data", savePiutang());
 }
 
 void loadAllData()
@@ -318,6 +354,7 @@ void menuUtama()
 
 int main()
 {
+
     loadAllData();
     menuUtama();
 
