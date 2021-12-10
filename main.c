@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <errno.h>
+#include <time.h>
 const char seperator[] = "____";
 const char enter[] = "\n";
 
+char filePiutang[] = "piutang.data";
+char fileTagihan[] = "tagihan.data";
+
+//Fungsi
 int isExistFile(char *fileName)
 {
     FILE *fp;
@@ -28,28 +32,6 @@ void makeFile(char *fileName)
     fclose(fp);
 }
 
-void writeFile(char *fileName, char *data)
-{
-
-    FILE *fp;
-    fp = fopen(fileName, "w"); // append
-
-    fprintf(fp, "%s", data);
-    fflush(fp);
-    fclose(fp);
-}
-
-void appendFile(char *fileName, char *data)
-{
-    printf("%s", data);
-    FILE *fp;
-    fp = fopen(fileName, "a"); // append
-
-    fprintf(fp, "%s", data);
-    fflush(fp);
-    fclose(fp);
-}
-
 char *readFileText(char *fileName)
 {
     FILE *fp;
@@ -58,173 +40,278 @@ char *readFileText(char *fileName)
     fp = fopen(fileName, "r");
     fseek(fp, 0, SEEK_END);
     size = ftell(fp);
-    fseek(fp, 0, SEEK_SET);
-
-    text = (char *)malloc(sizeof(char) * size);
-    fread(text, sizeof(char), size, fp);
-    fclose(fp);
-    return text;
-}
-
-typedef struct Pelanggan
-{
-    char *id;
-    char *nama;
-    char *alamat;
-    char *no_hp;
-} Pelanggan;
-
-Pelanggan *dataPelanggan;
-int sizeDataPelanggan = 0;
-
-void addPelanggan(Pelanggan p)
-{
-    int size = sizeof(dataPelanggan) / sizeof(dataPelanggan[0]);
-    dataPelanggan = (Pelanggan *)realloc(dataPelanggan, sizeof(Pelanggan) * (size + 1));
-    dataPelanggan[sizeDataPelanggan] = p;
-    sizeDataPelanggan++;
-}
-
-void editPelanggan(int index, Pelanggan p)
-{
-    dataPelanggan[index] = p;
-}
-
-void deletePelanggan(int index)
-{
-    int size = sizeof(dataPelanggan) / sizeof(dataPelanggan[0]);
-    for (int i = index; i < sizeDataPelanggan; i++)
+    if (size == 0)
     {
-        dataPelanggan[i] = dataPelanggan[i + 1];
-    }
-    dataPelanggan = (Pelanggan *)realloc(dataPelanggan, sizeof(Pelanggan) * (size - 1));
-    sizeDataPelanggan--;
-}
-
-void loadTabelPelanggan()
-{
-    sizeDataPelanggan = 0;
-    char *filename = "pelanggan.data";
-    if (isExistFile(filename))
-    {
-        char *data = readFileText(filename);
-        char *a, *c;
-        for (a = strtok_r(data, enter, &c); a != NULL; a = strtok_r(NULL, enter, &c))
-        {
-            Pelanggan p;
-            p.id = strtok(a, seperator);
-            p.nama = strtok(NULL, seperator);
-            p.alamat = strtok(NULL, seperator);
-            p.no_hp = strtok(NULL, seperator);
-            addPelanggan(p);
-        }
+        fclose(fp);
+        return NULL;
     }
     else
     {
-        makeFile(filename);
+        fseek(fp, 0, SEEK_SET);
+        text = (char *)malloc(sizeof(char) * size);
+        fread(text, sizeof(char), size, fp);
+        fclose(fp);
+        return text;
     }
 }
 
-void printAllPelanggan()
+char *getDate(int timestamp)
 {
-    int size = sizeDataPelanggan;
-    for (int i = 0; i < size; i++)
-    {
-        printf("%s\n", dataPelanggan[i].id);
-        printf("%s\n", dataPelanggan[i].nama);
-        printf("%s\n", dataPelanggan[i].alamat);
-        printf("%s\n\n", dataPelanggan[i].no_hp);
-    }
+    time_t epoch_time = timestamp;
+    struct tm *converted_time;
+    converted_time = localtime(&epoch_time);
+    tzset();
+    char *buffer = malloc(sizeof(char) * (26 + 1));
+    strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", converted_time);
+    return buffer;
 }
 
 typedef struct Piutang
 {
+    int timestamp;
     char *nama_pelanggan;
+    char *nik;
     char *tanggal;
     double jumlahPiutang;
     double bunga;
     double sisaSaldo;
+    double jumlahBayar;
+    double sisaCicilan;
     double periode;
+    char *klasifikasi;
 } Piutang;
+
+typedef struct Tagihan
+{
+    int timestamp;
+    int timestamp_piutang;
+    int timestamp_jatuhtempo;
+    double jumlahCicilan;
+    int cicilanKe;
+    char *jatuhtempo;
+    int flagbayar;
+    Piutang piutang;
+} Tagihan;
+
+Tagihan *dataTagihan;
+int sizeDataTagihan = 0;
 
 Piutang *dataPiutang;
 int sizeDataPiutang = 0;
 
-void addPiutang(Piutang p)
+void addPiutang(Piutang p, int write)
 {
+    // Masukkan dalam file
+    if (write)
+    {
+        FILE *fp;
+        fp = fopen(filePiutang, "a");
+        if (fp == NULL)
+        {
+            makeFile(filePiutang);
+            fp = fopen(filePiutang, "a");
+        }
+
+        fprintf(fp, "%d", p.timestamp);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%s", p.nik);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%s", p.nama_pelanggan);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%s", p.tanggal);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", p.jumlahPiutang);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", p.bunga);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", p.sisaSaldo);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", p.jumlahBayar);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", p.sisaCicilan);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", p.periode);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%s", p.klasifikasi);
+        fprintf(fp, "%s", enter);
+        fflush(fp);
+        fclose(fp);
+    }
+
+    // tambahkan data di memori
     int size = sizeof(dataPiutang) / sizeof(dataPiutang[0]);
     dataPiutang = (Piutang *)realloc(dataPiutang, sizeof(Piutang) * (size + 1));
     dataPiutang[sizeDataPiutang] = p;
     sizeDataPiutang++;
 }
 
-char *piutangToText()
+void addTagihan(Tagihan tagihan)
 {
-    for (int i = 0; i < sizeDataPiutang; i++)
+
+    dataTagihan = (Tagihan *)realloc(dataTagihan, sizeof(Tagihan) * (sizeDataPiutang + 1));
+    dataTagihan[sizeDataTagihan] = tagihan;
+    sizeDataPiutang++;
+}
+
+void generateTagihan(Piutang p)
+{
+    int timestampJatuhTempo = p.timestamp;
+    for (int i = 0; i < p.periode; i++)
     {
-        char *data = (char *)malloc(sizeof(char) * 1000);
+        timestampJatuhTempo += (3600 * 24 * 30);
+        Tagihan tagihan;
+        tagihan.timestamp = (int)time(NULL) + i;
+        tagihan.timestamp_piutang = p.timestamp;
+        tagihan.timestamp_jatuhtempo = timestampJatuhTempo;
+        tagihan.cicilanKe = i + 1;
+        tagihan.jumlahCicilan = p.jumlahPiutang * (100 + p.bunga) / 100 / p.periode;
+        tagihan.flagbayar = 0;
+        tagihan.piutang = p;
+
+        FILE *fp;
+        fp = fopen(fileTagihan, "a");
+        if (fp == NULL)
+        {
+            makeFile(fileTagihan);
+            fp = fopen(fileTagihan, "a");
+        }
+
+        fprintf(fp, "%d", tagihan.timestamp);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%d", tagihan.timestamp_piutang);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%d", tagihan.timestamp_jatuhtempo);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", tagihan.jumlahCicilan);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%d", tagihan.cicilanKe);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%s", getDate(tagihan.timestamp_jatuhtempo));
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%d", tagihan.flagbayar);
+        fprintf(fp, "%s", enter);
+        fflush(fp);
+        fclose(fp);
+
+        // Tambahkan data di memoria
+        int size = sizeof(dataTagihan) / sizeof(dataTagihan[0]);
+        dataTagihan = (Tagihan *)realloc(dataTagihan, sizeof(Tagihan) * (size + 1));
+        dataTagihan[sizeDataTagihan] = tagihan;
+        sizeDataPiutang++;
     }
 }
 
 void printAllPiutang()
 {
+    system("cls");
+    printf("\n********************************");
+    printf("\n*      Daftar Piutang          *");
+    printf("\n********************************\n");
     int size = sizeDataPiutang;
     for (int i = 0; i < size; i++)
     {
-        printf("%s\n", dataPiutang[i].nama_pelanggan);
-        printf("%s\n", dataPiutang[i].tanggal);
-        printf("%f\n", dataPiutang[i].jumlahPiutang);
-        printf("%f\n", dataPiutang[i].bunga);
-        printf("%f\n", dataPiutang[i].sisaSaldo);
-        printf("%f\n\n", dataPiutang[i].periode);
+        printf("Nama Pelanggan :%s\n", dataPiutang[i].nama_pelanggan);
+        printf("NIK :%s\n", dataPiutang[i].nik);
+        printf("Tanggal Piutang :%s\n", dataPiutang[i].nama_pelanggan);
+        printf("Sisa Piutang :%0.f\n\n", dataPiutang[i].sisaSaldo);
     }
 }
 
-char *savePiutang()
+void printAllTagihan()
 {
-    char *data = "a";
-
-    for (int i = 0; i < 1; i++)
+    system("cls");
+    printf("\n********************************");
+    printf("\n*      Daftar Tagihan          *");
+    printf("\n********************************\n");
+    int size = sizeDataTagihan;
+    for (int i = 0; i < size; i++)
     {
-        printf("%s", dataPiutang[i].nama_pelanggan);
-
-        // data = strcat(data, dataPiutang[i].tanggal);
-        // data = strcat(data, seperator);
-        // // data = strcat(data, (char)dataPiutang[i].jumlahPiutang);
-        // data = strcat(data, seperator);
-        // // data = strcat(data, dataPiutang[i].bunga);
-        // data = strcat(data, seperator);
-        // // data = strcat(data, dataPiutang[i].sisaSaldo);
-        // data = strcat(data, seperator);
-        // // data = strcat(data, dataPiutang[i].periode);
-        // data = strcat(data, enter);
+        printf("Nama Pelanggan :%s\n", dataTagihan[i].piutang.nama_pelanggan);
+        printf("Cicilan ke :%s\n", dataTagihan[i].cicilanKe);
+        printf("Jumlah :%s\n", dataTagihan[i].jumlahCicilan);
+        printf("Jatuh tempo :%0.f\n\n", dataTagihan[i].jatuhtempo);
     }
-    return data;
 }
 
 void loadTabelPiutang()
 {
+
     sizeDataPiutang = 0;
-    char *filename = "piutang.data";
-    if (isExistFile(filename))
+
+    if (isExistFile(filePiutang))
     {
-        char *data = readFileText(filename);
-        char *a, *c;
-        for (a = strtok_r(data, enter, &c); a != NULL; a = strtok_r(NULL, enter, &c))
+        char *data = readFileText(filePiutang);
+
+        //Check bila kosong
+        if (data != NULL)
         {
-            Piutang p;
-            p.nama_pelanggan = strtok(a, seperator);
-            p.tanggal = strtok(NULL, seperator);
-            p.jumlahPiutang = atof(strtok(NULL, seperator));
-            p.bunga = atof(strtok(NULL, seperator));
-            p.sisaSaldo = atof(strtok(NULL, seperator));
-            p.periode = atof(strtok(NULL, seperator));
-            addPiutang(p);
+            char *a, *c;
+            for (a = strtok_r(data, enter, &c); a != NULL; a = strtok_r(NULL, enter, &c))
+            {
+
+                Piutang p;
+                p.timestamp = atoi(strtok(a, seperator));
+                p.nik = strtok(NULL, seperator);
+                p.nama_pelanggan = strtok(NULL, seperator);
+                p.tanggal = strtok(NULL, seperator);
+                p.jumlahPiutang = atof(strtok(NULL, seperator));
+                p.bunga = atof(strtok(NULL, seperator));
+                p.sisaSaldo = atof(strtok(NULL, seperator));
+                p.jumlahBayar = atof(strtok(NULL, seperator));
+                p.sisaCicilan = atof(strtok(NULL, seperator));
+                p.periode = atof(strtok(NULL, seperator));
+                p.klasifikasi = strtok(NULL, seperator);
+                addPiutang(p, 0);
+            }
         }
     }
     else
     {
-        makeFile(filename);
+        makeFile(filePiutang);
+    }
+}
+
+void loadTabelTagihan()
+{
+
+    sizeDataTagihan = 0;
+
+    if (isExistFile(fileTagihan))
+    {
+        char *data = readFileText(fileTagihan);
+
+        //Check bila kosong
+        if (data != NULL)
+        {
+            int idpiutang = 0;
+            char *a, *c;
+            for (a = strtok_r(data, enter, &c); a != NULL; a = strtok_r(NULL, enter, &c))
+            {
+
+                Tagihan p;
+                p.timestamp = atoi(strtok(a, seperator));
+                p.timestamp_piutang = atoi(strtok(NULL, seperator));
+                p.timestamp_jatuhtempo = atoi(strtok(NULL, seperator));
+                p.jumlahCicilan = atof(strtok(NULL, seperator));
+                p.cicilanKe = atoi(strtok(NULL, seperator));
+                p.jatuhtempo = strtok(NULL, seperator);
+                p.flagbayar = atoi(strtok(NULL, seperator));
+
+                if (p.timestamp_piutang != dataPiutang[idpiutang].timestamp)
+                {
+                    idpiutang++;
+                }
+
+                p.piutang = dataPiutang[idpiutang];
+
+                addTagihan(p);
+            }
+            // printf("%d", sizeDataTagihan);
+        }
+    }
+    else
+    {
+        makeFile(fileTagihan);
     }
 }
 
@@ -234,10 +321,9 @@ void formPiutang()
     char nama_pelanggan[30];
     getchar();
     gets(nama_pelanggan);
-    printf("Masukkan Tanggal : ");
-    char tanggal[10];
-    getchar();
-    gets(tanggal);
+    printf("Masukkan NIK : ");
+    char nik[30];
+    gets(nik);
     printf("Masukkan Jumlah Piutang : ");
     double jumlahPiutang = 0;
     scanf("%lf", &jumlahPiutang);
@@ -247,21 +333,27 @@ void formPiutang()
     printf("Masukkan Berapa bulan cicilan : ");
     double periode = 0;
     scanf("%lf", &periode);
+
     Piutang p;
+    p.timestamp = (int)time(NULL);
     p.nama_pelanggan = nama_pelanggan;
-    p.tanggal = tanggal;
+    p.nik = nik;
+    p.tanggal = getDate(p.timestamp);
     p.jumlahPiutang = jumlahPiutang;
     p.bunga = bunga;
-    p.sisaSaldo = 0;
+    p.sisaSaldo = jumlahPiutang * (100 + p.bunga) / 100;
+    p.klasifikasi = "Lancar";
+    p.jumlahBayar = 0;
+    p.sisaCicilan = 0;
     p.periode = periode;
-    addPiutang(p);
-
-    // writeFile("piutang.data", savePiutang());
+    addPiutang(p, 1);
+    generateTagihan(p);
 }
 
 void loadAllData()
 {
     loadTabelPiutang();
+    loadTabelTagihan();
 }
 
 void menuUtama();
@@ -282,7 +374,7 @@ void menuTagihan()
     switch (pilih)
     {
     case 1:
-
+        printAllTagihan();
         break;
     case 2:
 
@@ -312,7 +404,7 @@ void menuPiutang()
     switch (pilih)
     {
     case 1:
-
+        printAllPiutang();
         break;
     case 2:
         formPiutang();
@@ -354,9 +446,7 @@ void menuUtama()
 
 int main()
 {
-
     loadAllData();
     menuUtama();
-
     return 0;
 }
