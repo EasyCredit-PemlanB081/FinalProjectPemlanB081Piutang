@@ -2,14 +2,28 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 const char seperator[] = "____";
 const char enter[] = "\n";
+
+const int ID = 0;
+const int ID_PIUTANG = 2;
+const int NIK = 10;
+const int NAMA = 11;
+
+const double denda = 0.1;
 
 char filePiutang[] = "piutang.data";
 char fileTagihan[] = "tagihan.data";
 
 void menuUtama();
+
 //Fungsi
+int getNow()
+{
+    return (int)time(NULL);
+}
+
 int isExistFile(char *fileName)
 {
     FILE *fp;
@@ -100,6 +114,286 @@ int sizeDataTagihan = 0;
 Piutang *dataPiutang;
 int sizeDataPiutang = 0;
 
+void tukarPiutang(int i, int j)
+{
+    Piutang temp = dataPiutang[i];
+    dataPiutang[i] = dataPiutang[j];
+    dataPiutang[j] = temp;
+}
+
+void cekColumnPiutang(int i, int j, int column)
+{
+    if (column == ID)
+    {
+        if (dataPiutang[i].timestamp > dataPiutang[j].timestamp)
+        {
+            tukarPiutang(i, j);
+        }
+    }
+    else if (column == NIK)
+    {
+        if (strcmp(dataPiutang[i].nik, dataPiutang[j].nik) > 0)
+        {
+            tukarPiutang(i, j);
+        }
+    }
+    else if (column == NAMA)
+    {
+        if (strcmp(dataPiutang[i].nama_pelanggan, dataPiutang[j].nama_pelanggan) > 0)
+        {
+            tukarPiutang(i, j);
+        }
+    }
+}
+
+void sortingPiutang(int column)
+{
+    for (int i = 0; i < sizeDataPiutang; i++)
+    {
+
+        for (int j = i + 1; j < sizeDataPiutang; j++)
+        {
+            cekColumnPiutang(i, j, column);
+        }
+    }
+}
+
+void tukarTagihan(int i, int j)
+{
+    Tagihan temp = dataTagihan[i];
+    dataTagihan[i] = dataTagihan[j];
+    dataTagihan[j] = temp;
+}
+
+void cekColumnTagihan(int i, int j, int column)
+{
+    if (column == ID)
+    {
+        if (dataTagihan[i].timestamp > dataTagihan[j].timestamp)
+        {
+            tukarTagihan(i, j);
+        }
+    }
+    else if (column == NIK)
+    {
+        if (strcmp(dataTagihan[i].piutang.nik, dataTagihan[j].piutang.nik) > 0)
+        {
+            tukarTagihan(i, j);
+        }
+    }
+    else if (column == NAMA)
+    {
+        if (strcmp(dataTagihan[i].piutang.nama_pelanggan, dataTagihan[j].piutang.nama_pelanggan) > 0)
+        {
+            tukarTagihan(i, j);
+        }
+    }
+    else if (column == ID_PIUTANG)
+    {
+        if (dataTagihan[i].timestamp_piutang > dataTagihan[j].timestamp_piutang)
+        {
+            tukarTagihan(i, j);
+        }
+    }
+}
+
+void sortingTagihan(int column)
+{
+    for (int i = 0; i < sizeDataTagihan; i++)
+    {
+
+        for (int j = i + 1; j < sizeDataTagihan; j++)
+        {
+            cekColumnTagihan(i, j, column);
+        }
+    }
+}
+
+int seachingTagihanByIDPiutang(int timestamp)
+{
+    sortingTagihan(ID_PIUTANG);
+    int step = sizeDataTagihan == 1 ? 0 : sqrt(sizeDataTagihan);
+    int jumper = step;
+    int prev = 0;
+    while (dataTagihan[jumper].timestamp_piutang <= timestamp && jumper < sizeDataTagihan)
+    {
+        //proses mencari batesan lompat
+        prev = jumper;
+        jumper += step;
+        if (jumper >= sizeDataTagihan)
+        {
+            break;
+        }
+    }
+
+    int founded = 0;
+    for (int i = prev; i <= jumper; i++)
+    {
+        if (dataTagihan[jumper].timestamp_piutang == timestamp)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int searchingPiutangByNIK(char *nik)
+{
+    sortingPiutang(NIK);
+    int step = sizeDataPiutang == 1 ? 0 : sqrt(sizeDataPiutang);
+    int jumper = step;
+    int prev = 0;
+    while (strcmp(dataPiutang[jumper].nik, nik) <= 0 && jumper < sizeDataPiutang)
+    {
+        //proses mencari batesan lompat
+        prev = jumper;
+        jumper += step;
+        if (jumper >= sizeDataPiutang)
+        {
+            break;
+        }
+    }
+
+    int founded = 0;
+    for (int i = prev; i <= jumper; i++)
+    {
+        if (strcmp(dataPiutang[i].nik, nik) == 0)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int searchingPiutangByNama(char *nama)
+{
+    sortingPiutang(NAMA);
+    int step = sqrt(sizeDataPiutang);
+    int jumper = step;
+    int prev = 0;
+
+    while (strcmp(dataPiutang[jumper].nama_pelanggan, nama) <= 0 && jumper < sizeDataPiutang)
+    {
+        //proses mencari batesan lompat
+        prev = jumper;
+        jumper += step;
+        if (jumper >= sizeDataPiutang)
+        {
+            break;
+        }
+    }
+
+    int founded = 0;
+    for (int i = prev; i <= jumper; i++)
+    {
+        if (strcmp(dataPiutang[i].nama_pelanggan, nama) == 0)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void setKlasifikasi(Piutang p, int klasifikasi)
+{
+    if (klasifikasi <= 1)
+    {
+        p.klasifikasi = "Lancar";
+    }
+    else if (klasifikasi <= 3)
+    {
+        p.klasifikasi = "Dalam perhatian";
+    }
+    else if (klasifikasi <= 5)
+    {
+        p.klasifikasi = "Kurang";
+    }
+    else if (klasifikasi < 7)
+    {
+        p.klasifikasi = "Diragukan ";
+    }
+    else
+    {
+        p.klasifikasi = "Macet ";
+    }
+}
+
+void rewritePiutang()
+{
+    sortingPiutang(ID);
+
+    FILE *fp;
+    fp = fopen(filePiutang, "w");
+    if (fp == NULL)
+    {
+        makeFile(filePiutang);
+        fp = fopen(filePiutang, "w");
+    }
+    int size = sizeDataPiutang;
+    for (int i = 0; i < size; i++)
+    {
+        fprintf(fp, "%d", dataPiutang[i].timestamp);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%s", dataPiutang[i].nik);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%s", dataPiutang[i].nama_pelanggan);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%s", dataPiutang[i].tanggal);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", dataPiutang[i].jumlahPiutang);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", dataPiutang[i].bunga);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", dataPiutang[i].sisaSaldo);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", dataPiutang[i].jumlahBayar);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", dataPiutang[i].sisaCicilan);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", dataPiutang[i].periode);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%s", dataPiutang[i].klasifikasi);
+        fprintf(fp, "%s", enter);
+    }
+
+    fflush(fp);
+    fclose(fp);
+}
+
+void rewriteTagihan()
+{
+    sortingTagihan(ID);
+
+    FILE *fp;
+    fp = fopen(fileTagihan, "w");
+    if (fp == NULL)
+    {
+        makeFile(fileTagihan);
+        fp = fopen(fileTagihan, "w");
+    }
+    int size = sizeDataTagihan;
+    for (int i = 0; i < size; i++)
+    {
+        fprintf(fp, "%d", dataTagihan[i].timestamp);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%d", dataTagihan[i].timestamp_piutang);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%d", dataTagihan[i].timestamp_jatuhtempo);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%0.f", dataTagihan[i].jumlahCicilan);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%d", dataTagihan[i].cicilanKe);
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%s", getDate(dataTagihan[i].timestamp_jatuhtempo));
+        fprintf(fp, "%s", seperator);
+        fprintf(fp, "%d", dataTagihan[i].flagbayar);
+        fprintf(fp, "%s", enter);
+    }
+
+    fflush(fp);
+    fclose(fp);
+}
+
 void addPiutang(Piutang p, int write)
 {
     // Masukkan dalam file
@@ -140,8 +434,7 @@ void addPiutang(Piutang p, int write)
     }
 
     // tambahkan data di memori
-    int size = sizeDataPiutang;
-    dataPiutang = (Piutang *)realloc(dataPiutang, sizeof(Piutang) * (size + 1));
+    dataPiutang = (Piutang *)realloc(dataPiutang, sizeof(Piutang) * (sizeDataPiutang + 1));
     dataPiutang[sizeDataPiutang] = p;
     sizeDataPiutang++;
 }
@@ -159,9 +452,10 @@ void generateTagihan(Piutang p)
     int timestampJatuhTempo = p.timestamp;
     for (int i = 0; i < p.periode; i++)
     {
+        // Tambahkan 30 hari
         timestampJatuhTempo += (3600 * 24 * 30);
         Tagihan tagihan;
-        tagihan.timestamp = (int)time(NULL) + i;
+        tagihan.timestamp = getNow() + i;
         tagihan.timestamp_piutang = p.timestamp;
         tagihan.timestamp_jatuhtempo = timestampJatuhTempo;
         tagihan.cicilanKe = i + 1;
@@ -195,10 +489,9 @@ void generateTagihan(Piutang p)
         fclose(fp);
 
         // Tambahkan data di memoria
-        int size = sizeof(dataTagihan) / sizeof(dataTagihan[0]);
-        dataTagihan = (Tagihan *)realloc(dataTagihan, sizeof(Tagihan) * (size + 1));
+        dataTagihan = (Tagihan *)realloc(dataTagihan, sizeof(Tagihan) * (sizeDataTagihan + 1));
         dataTagihan[sizeDataTagihan] = tagihan;
-        sizeDataPiutang++;
+        sizeDataTagihan++;
     }
 }
 
@@ -213,7 +506,7 @@ void printAllPiutang()
     {
         printf("Nama Pelanggan :%s\n", dataPiutang[i].nama_pelanggan);
         printf("NIK :%s\n", dataPiutang[i].nik);
-        printf("Tanggal Piutang :%s\n", dataPiutang[i].nama_pelanggan);
+        printf("Tanggal Piutang :%s\n", dataPiutang[i].tanggal);
         printf("Sisa Piutang :%0.f\n\n", dataPiutang[i].sisaSaldo);
     }
 
@@ -235,6 +528,8 @@ void printAllTagihan()
         printf("Jumlah :%0.f\n", dataTagihan[i].jumlahCicilan);
         printf("Jatuh tempo :%s\n\n", dataTagihan[i].jatuhtempo);
     }
+    printf("1. Cari berdasarkan NIK");
+    printf("2. Cari berdasarkan Nama");
     system("pause");
     menuUtama();
 }
@@ -285,7 +580,9 @@ void loadTabelTagihan()
         //Check bila kosong
         if (data != NULL)
         {
+
             int idpiutang = 0;
+            int klasifikasi = 0;
             char *a, *c;
             for (a = strtok_r(data, enter, &c); a != NULL; a = strtok_r(NULL, enter, &c))
             {
@@ -301,10 +598,11 @@ void loadTabelTagihan()
                 if (p.timestamp_piutang != dataPiutang[idpiutang].timestamp)
                 {
                     idpiutang++;
+                    klasifikasi = 0;
                 }
-                // printf("%d", idpiutang);
+                klasifikasi++;
+
                 p.piutang = dataPiutang[idpiutang];
-                // printf("%s", p.piutang.nama_pelanggan);
                 addTagihan(p);
             }
             // printf("%d", sizeDataTagihan);
@@ -313,6 +611,38 @@ void loadTabelTagihan()
     else
     {
         makeFile(fileTagihan);
+    }
+}
+
+void deleteDataTagihan(int index)
+{
+    if (index < sizeDataTagihan)
+    {
+        for (int i = index; i < sizeDataTagihan - 1; i++)
+        {
+            dataTagihan[i] = dataTagihan[i + 1];
+        }
+        sizeDataTagihan--;
+    }
+}
+
+void deleteDataPiutang(int index)
+{
+    if (index < sizeDataPiutang)
+    {
+        int indexStart = seachingTagihanByIDPiutang(dataPiutang[index].timestamp);
+        for (int i = index; i < sizeDataPiutang - 1; i++)
+        {
+            dataPiutang[i] = dataPiutang[i + 1];
+        }
+        // printf("start :%d", indexStart);
+        while (dataTagihan[indexStart].timestamp_piutang == dataPiutang[index].timestamp)
+        {
+            deleteDataTagihan(indexStart);
+            indexStart--;
+        }
+        rewriteTagihan();
+        sizeDataPiutang--;
     }
 }
 
@@ -336,7 +666,7 @@ void formPiutang()
     scanf("%lf", &periode);
 
     Piutang p;
-    p.timestamp = (int)time(NULL);
+    p.timestamp = getNow();
     p.nama_pelanggan = nama_pelanggan;
     p.nik = nik;
     p.tanggal = getDate(p.timestamp);
@@ -349,6 +679,80 @@ void formPiutang()
     p.periode = periode;
     addPiutang(p, 1);
     generateTagihan(p);
+    printf("Data berhasil ditambah\n");
+    system("pause");
+    menuUtama();
+}
+
+void formEditPelanggan()
+{
+    system("cls");
+    printf("\n********************************");
+    printf("\n*       Edit Profil            *");
+    printf("\n********************************");
+    printf("\nMasukkan NIK : ");
+    char nik[30];
+    getchar();
+    gets(nik);
+
+    int index = searchingPiutangByNIK(&nik);
+
+    if (index != -1)
+    {
+        printf("Data lama :\n");
+        printf("Nama Pelanggan :%s\n", dataPiutang[index].nama_pelanggan);
+        printf("NIK :%s\n\n", dataPiutang[index].nik);
+        printf("Data Baru :\n");
+        printf("Masukkan Nama Pelanggan : ");
+        getchar();
+        gets(dataPiutang[index].nama_pelanggan);
+        printf("Masukkan NIK Pelanggan : ");
+        gets(dataPiutang[index].nik);
+        rewritePiutang();
+    }
+    else
+    {
+        printf("NIK tidak ditemukan");
+    }
+    system("pause");
+    menuUtama();
+}
+
+void formDeletePiutang()
+{
+    system("cls");
+    printf("\n***********************************************");
+    printf("\n*   Hapus Piutang (Akan menghapus tagihan)    *");
+    printf("\n***********************************************");
+    printf("\nMasukkan NIK : ");
+    char nik[30];
+    getchar();
+    gets(nik);
+
+    int index = searchingPiutangByNIK(&nik);
+
+    if (index != -1)
+    {
+        printf("Data lama :\n");
+        printf("Nama Pelanggan :%s\n", dataPiutang[index].nama_pelanggan);
+        printf("NIK :%s\n", dataPiutang[index].nik);
+        printf("Piutang :%0.f\n", dataPiutang[index].jumlahPiutang);
+        printf("Apakah anda yakin untuk menghapus tekan (1) untuk melanjutkan ? :\n");
+        int i = 0;
+        scanf("%d", &i);
+        if (i == 1)
+        {
+            printf("Hapus data berhasil\n");
+            deleteDataPiutang(index);
+            rewritePiutang();
+        }
+    }
+    else
+    {
+        printf("NIK tidak ditemukan");
+    }
+    system("pause");
+    // menuUtama();
 }
 
 void loadAllData()
@@ -364,7 +768,8 @@ void menuTagihan()
     printf("\n*        Menu Tagihan          *");
     printf("\n********************************");
     printf("\nPilih Menu : ");
-    printf("\n1. Lihat Tagihan");
+    printf("\n1. Lihat Tagihan Sudah dibayar");
+    printf("\n1. Lihat Tagihan Belum dibayar");
     printf("\n2. Bayar Tagihan");
     printf("\nTekan tombol lainnya untuk keluar\n");
 
@@ -396,6 +801,8 @@ void menuPiutang()
     printf("\nPilih Menu : ");
     printf("\n1. Lihat Piutang");
     printf("\n2. Tambah Piutang");
+    printf("\n3. Edit Data Pelanggan");
+    printf("\n4. Hapus Piutang");
     printf("\nTekan tombol lainnya untuk keluar\n");
 
     int pilih;
@@ -409,7 +816,10 @@ void menuPiutang()
         formPiutang();
         break;
     case 3:
-
+        formEditPelanggan();
+        break;
+    case 4:
+        formDeletePiutang();
         break;
     default:
         menuUtama();
@@ -447,7 +857,5 @@ int main()
 {
     loadAllData();
     menuUtama();
-
-    // printAllPiutang();
     return 0;
 }
