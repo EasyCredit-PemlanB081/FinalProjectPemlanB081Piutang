@@ -8,6 +8,7 @@ const char enter[] = "\n";
 char filePiutang[] = "piutang.data";
 char fileTagihan[] = "tagihan.data";
 
+void menuUtama();
 //Fungsi
 int isExistFile(char *fileName)
 {
@@ -139,18 +140,18 @@ void addPiutang(Piutang p, int write)
     }
 
     // tambahkan data di memori
-    int size = sizeof(dataPiutang) / sizeof(dataPiutang[0]);
+    int size = sizeDataPiutang;
     dataPiutang = (Piutang *)realloc(dataPiutang, sizeof(Piutang) * (size + 1));
     dataPiutang[sizeDataPiutang] = p;
     sizeDataPiutang++;
 }
 
-void addTagihan(Tagihan tagihan)
+void addTagihan(Tagihan t)
 {
 
-    dataTagihan = (Tagihan *)realloc(dataTagihan, sizeof(Tagihan) * (sizeDataPiutang + 1));
-    dataTagihan[sizeDataTagihan] = tagihan;
-    sizeDataPiutang++;
+    dataTagihan = (Tagihan *)realloc(dataTagihan, sizeof(Tagihan) * (sizeDataTagihan + 1));
+    dataTagihan[sizeDataTagihan] = t;
+    sizeDataTagihan++;
 }
 
 void generateTagihan(Piutang p)
@@ -194,10 +195,9 @@ void generateTagihan(Piutang p)
         fclose(fp);
 
         // Tambahkan data di memoria
-        int size = sizeof(dataTagihan) / sizeof(dataTagihan[0]);
-        dataTagihan = (Tagihan *)realloc(dataTagihan, sizeof(Tagihan) * (size + 1));
+        dataTagihan = (Tagihan *)realloc(dataTagihan, sizeof(Tagihan) * (sizeDataTagihan + 1));
         dataTagihan[sizeDataTagihan] = tagihan;
-        sizeDataPiutang++;
+        sizeDataTagihan++;
     }
 }
 
@@ -215,6 +215,9 @@ void printAllPiutang()
         printf("Tanggal Piutang :%s\n", dataPiutang[i].nama_pelanggan);
         printf("Sisa Piutang :%0.f\n\n", dataPiutang[i].sisaSaldo);
     }
+
+    system("pause");
+    menuUtama();
 }
 
 void printAllTagihan()
@@ -227,17 +230,17 @@ void printAllTagihan()
     for (int i = 0; i < size; i++)
     {
         printf("Nama Pelanggan :%s\n", dataTagihan[i].piutang.nama_pelanggan);
-        printf("Cicilan ke :%s\n", dataTagihan[i].cicilanKe);
-        printf("Jumlah :%s\n", dataTagihan[i].jumlahCicilan);
-        printf("Jatuh tempo :%0.f\n\n", dataTagihan[i].jatuhtempo);
+        printf("Cicilan ke :%d\n", dataTagihan[i].cicilanKe);
+        printf("Jumlah :%0.f\n", dataTagihan[i].jumlahCicilan);
+        printf("Jatuh tempo :%s\n\n", dataTagihan[i].jatuhtempo);
     }
+    system("pause");
+    menuUtama();
 }
 
 void loadTabelPiutang()
 {
-
     sizeDataPiutang = 0;
-
     if (isExistFile(filePiutang))
     {
         char *data = readFileText(filePiutang);
@@ -273,9 +276,7 @@ void loadTabelPiutang()
 
 void loadTabelTagihan()
 {
-
     sizeDataTagihan = 0;
-
     if (isExistFile(fileTagihan))
     {
         char *data = readFileText(fileTagihan);
@@ -296,14 +297,13 @@ void loadTabelTagihan()
                 p.cicilanKe = atoi(strtok(NULL, seperator));
                 p.jatuhtempo = strtok(NULL, seperator);
                 p.flagbayar = atoi(strtok(NULL, seperator));
-
                 if (p.timestamp_piutang != dataPiutang[idpiutang].timestamp)
                 {
                     idpiutang++;
                 }
-
+                // printf("%d", idpiutang);
                 p.piutang = dataPiutang[idpiutang];
-
+                // printf("%s", p.piutang.nama_pelanggan);
                 addTagihan(p);
             }
             // printf("%d", sizeDataTagihan);
@@ -355,8 +355,6 @@ void loadAllData()
     loadTabelPiutang();
     loadTabelTagihan();
 }
-
-void menuUtama();
 
 void menuTagihan()
 {
@@ -448,5 +446,7 @@ int main()
 {
     loadAllData();
     menuUtama();
+
+    // printAllPiutang();
     return 0;
 }
