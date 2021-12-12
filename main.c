@@ -17,7 +17,7 @@ char filePiutang[] = "piutang.data";
 char fileTagihan[] = "tagihan.data";
 
 void menuUtama();
-
+void loadAllData();
 //Fungsi
 int getNow()
 {
@@ -225,7 +225,7 @@ int seachingTagihanByIDPiutang(int timestamp)
     }
 }
 
-int searchingPiutangByNIK(char *nik)
+int searchingPiutangBelumLunasByNIK(char *nik)
 {
     if (sizeDataPiutang == 0)
     {
@@ -240,7 +240,7 @@ int searchingPiutangByNIK(char *nik)
         //proses mencari batesan lompat
         prev = jumper;
         jumper += step;
-        if (jumper >= sizeDataPiutang)
+        if (jumper >= sizeDataPiutang || prev == jumper)
         {
             break;
         }
@@ -249,7 +249,7 @@ int searchingPiutangByNIK(char *nik)
     int founded = 0;
     for (int i = prev; i <= jumper; i++)
     {
-        if (strcmp(dataPiutang[i].nik, nik) == 0)
+        if (strcmp(dataPiutang[i].nik, nik) == 0 && dataPiutang[i].sisaSaldo > 0)
         {
             return i;
         }
@@ -388,6 +388,119 @@ void rewriteTagihan()
 
     fflush(fp);
     fclose(fp);
+}
+
+void cetakTagihanBelumDibayarByIdPiutang(int index)
+{
+    system("cls");
+    Piutang piutang = dataPiutang[index];
+    int indexStart = seachingTagihanByIDPiutang(piutang.timestamp);
+    printf("Data Piutang\n");
+    printf("Pelanggan : %s\n", piutang.nama_pelanggan);
+    printf("Total Piutang : %0.f\n", piutang.jumlahPiutang);
+    printf("Sisa Piutang : %0.f\n", piutang.sisaSaldo);
+    printf("Status %s\n\n", piutang.klasifikasi);
+
+    printf("=================================\n");
+    for (int i = indexStart; i < indexStart + piutang.periode; i++)
+    {
+        if (dataTagihan[i].flagbayar == 0)
+        {
+            printf("Cicilan ke %d\n", dataTagihan[i].cicilanKe);
+            printf("Jumlah Cicilan : %0.f\n", dataTagihan[i].jumlahCicilan);
+            printf("Tanggal Jatuh Tempo : %s\n\n", dataTagihan[i].jatuhtempo);
+        }
+    }
+}
+
+void bayarCicilan(int index, int jumlahCicilan)
+{
+    int indexStart = seachingTagihanByIDPiutang(dataPiutang[index].timestamp);
+    for (int i = indexStart; i < indexStart + dataPiutang[index].periode && jumlahCicilan > 0; i++)
+    {
+        if (dataTagihan[i].flagbayar == 0)
+        {
+            dataTagihan[i].flagbayar = 1;
+            dataPiutang[index].sisaCicilan -= 1;
+            dataPiutang[index].sisaSaldo -= dataTagihan[i].jumlahCicilan;
+            jumlahCicilan -= 1;
+        }
+    }
+}
+
+void lunasCicilan(int index)
+{
+    int indexStart = seachingTagihanByIDPiutang(dataPiutang[index].timestamp);
+    for (int i = indexStart; i < indexStart + dataPiutang[index].periode; i++)
+    {
+        if (dataTagihan[i].flagbayar == 0)
+        {
+            dataTagihan[i].flagbayar = 1;
+            dataPiutang[index].sisaCicilan -= 1;
+            dataPiutang[index].sisaSaldo -= dataTagihan[i].jumlahCicilan;
+        }
+    }
+}
+
+void bayarPiutang()
+{
+    system("cls");
+    printf("\n********************************");
+    printf("\n*  Bayar Tagihan Piutang       *");
+    printf("\n********************************\n");
+    printf("Masukkan NIK Pelanggan : ");
+    char nik[30];
+    getchar();
+    gets(nik);
+    int index = searchingPiutangBelumLunasByNIK(nik);
+
+    if (index > -1)
+    {
+        cetakTagihanBelumDibayarByIdPiutang(index);
+        printf("\n\nPilih Metode Pembayaran");
+        printf("\n1. 1 Cicilan");
+        printf("\n2. Custom");
+        printf("\n3. Lunas");
+
+        printf("\n\nPilihan : ");
+        int pilihan;
+        scanf("%d", &pilihan);
+        switch (pilihan)
+        {
+        case 1:
+            bayarCicilan(index, 1);
+            break;
+        case 2:
+            printf("\nMasukkan Jumlah Cicilan : ");
+            int jumlahCicilan;
+            scanf("%d", &jumlahCicilan);
+            bayarCicilan(index, jumlahCicilan);
+            rewritePiutang();
+            rewriteTagihan();
+            loadAllData();
+            printf("\nPembayaran berhasil ...");
+            break;
+        case 3:
+            lunasCicilan(index);
+            rewritePiutang();
+            rewriteTagihan();
+            loadAllData();
+            printf("\nPembayaran berhasil ...");
+            break;
+        default:
+            printf("\nPilihan tidak tersedia");
+            break;
+        }
+
+        system("pause");
+        menuUtama();
+    }
+    else
+    {
+        printf("\nMohon maaf, Tagihan tidak ditemukan");
+        system("pause");
+        menuUtama();
+    }
 }
 
 void addPiutang(Piutang p, int write)
@@ -658,7 +771,7 @@ void formPiutang()
     printf("Masukkan NIK : ");
     char nik[30];
     gets(nik);
-    int recentUtang = searchingPiutangByNIK(&nik);
+    int recentUtang = searchingPiutangBelumLunasByNIK(nik);
     if (recentUtang > -1)
     {
 
@@ -689,7 +802,7 @@ void formPiutang()
     p.sisaSaldo = jumlahPiutang * (100 + p.bunga) / 100;
     p.klasifikasi = "Lancar";
     p.jumlahBayar = 0;
-    p.sisaCicilan = 0;
+    p.sisaCicilan = periode;
     p.periode = periode;
     addPiutang(p, 1);
     generateTagihan(p);
@@ -709,7 +822,7 @@ void formEditPelanggan()
     getchar();
     gets(nik);
 
-    int index = searchingPiutangByNIK(&nik);
+    int index = searchingPiutangBelumLunasByNIK(nik);
 
     if (index != -1)
     {
@@ -742,7 +855,7 @@ void formDeletePiutang()
     getchar();
     gets(nik);
 
-    int index = searchingPiutangByNIK(&nik);
+    int index = searchingPiutangBelumLunasByNIK(nik);
 
     if (index != -1)
     {
@@ -782,8 +895,8 @@ void menuTagihan()
     printf("\n********************************");
     printf("\nPilih Menu : ");
     printf("\n1. Lihat Tagihan Sudah dibayar");
-    printf("\n1. Lihat Tagihan Belum dibayar");
-    printf("\n2. Bayar Tagihan");
+    printf("\n2. Lihat Tagihan Belum dibayar");
+    printf("\n3. Bayar Tagihan");
     printf("\nTekan tombol lainnya untuk keluar\n");
 
     int pilih;
@@ -797,7 +910,7 @@ void menuTagihan()
 
         break;
     case 3:
-
+        bayarPiutang();
         break;
     default:
         menuUtama();
