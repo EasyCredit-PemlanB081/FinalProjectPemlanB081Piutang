@@ -10,6 +10,11 @@ const int ID = 0;
 const int ID_PIUTANG = 2;
 const int NIK = 10;
 const int NAMA = 11;
+const int FLAG = 12;
+
+//flag Lunas
+const int LUNAS = 1;
+const int BELUMLUNAS = 0;
 
 const double denda = 0.1;
 
@@ -413,7 +418,7 @@ void cetakTagihanBelumDibayarByIdPiutang(int index)
         {
             printf("Cicilan ke %d\n", dataTagihan[i].cicilanKe);
             printf("Jumlah Cicilan : %0.f\n", dataTagihan[i].jumlahCicilan);
-            printf("Tanggal Jatuh Tempo : %s\n\n", dataTagihan[i].jatuhtempo);
+            printf("Jatuh tempo :%s\n\n", getDate(dataTagihan[i].timestamp_jatuhtempo));
         }
     }
 }
@@ -483,14 +488,14 @@ void bayarPiutang()
             scanf("%d", &jumlahCicilan);
             bayarCicilan(index, jumlahCicilan);
 
-            printf("\nPembayaran berhasil ...");
+            printf("\nPembayaran berhasil ...\n");
             break;
         case 3:
             lunasCicilan(index);
-            printf("\nPembayaran berhasil ...");
+            printf("\nPembayaran berhasil ...\n");
             break;
         default:
-            printf("\nPilihan tidak tersedia");
+            printf("\nPilihan tidak tersedia\n");
             break;
         }
         rewritePiutang();
@@ -501,7 +506,7 @@ void bayarPiutang()
     }
     else
     {
-        printf("\nMohon maaf, Tagihan tidak ditemukan");
+        printf("\nMohon maaf, Tagihan tidak ditemukan\n");
         system("pause");
         menuUtama();
     }
@@ -656,6 +661,43 @@ void cariPiutang(int column)
     menuUtama();
 }
 
+void cariTagihan(int column)
+{
+    system("cls");
+    if (column == NAMA)
+    {
+        printf("Pencarian Tagihan belum lunas berdasarkan Nama\n");
+    }
+    else
+    {
+        printf("Pencarian Tagihan belum lunas berdasarkan NIK\n");
+    }
+    char keyword[30];
+    printf("Masukkan keyword pencarian : ");
+    scanf("%s", keyword);
+    int i;
+    if (column == NAMA)
+    {
+        i = searchingPiutangBelumLunasByNama(keyword);
+    }
+    else
+    {
+        i = searchingPiutangBelumLunasByNIK(keyword);
+    }
+
+    if (i >= 0)
+    {
+
+        cetakTagihanBelumDibayarByIdPiutang(i);
+    }
+    else
+    {
+        printf("Data tidak ditemukan\n");
+    }
+    system("pause");
+    menuUtama();
+}
+
 void printAllPiutang()
 {
     system("cls");
@@ -672,7 +714,7 @@ void printAllPiutang()
     menuUtama();
 }
 
-void printAllTagihan()
+void printAllTagihan(int flag)
 {
     system("cls");
     printf("\n********************************");
@@ -681,13 +723,15 @@ void printAllTagihan()
     int size = sizeDataTagihan;
     for (int i = 0; i < size; i++)
     {
-        printf("Nama Pelanggan :%s\n", dataTagihan[i].piutang.nama_pelanggan);
-        printf("Cicilan ke :%d\n", dataTagihan[i].cicilanKe);
-        printf("Jumlah :%0.f\n", dataTagihan[i].jumlahCicilan);
-        printf("Jatuh tempo :%s\n\n", dataTagihan[i].jatuhtempo);
+        if (dataTagihan[i].flagbayar == flag)
+        {
+            printf("Nama Pelanggan :%s\n", dataTagihan[i].piutang.nama_pelanggan);
+            printf("Cicilan ke :%d\n", dataTagihan[i].cicilanKe);
+            printf("Jumlah :%0.f\n", dataTagihan[i].jumlahCicilan);
+            printf("Jatuh tempo :%s\n\n", dataTagihan[i].jatuhtempo);
+        }
     }
-    printf("1. Cari berdasarkan NIK");
-    printf("2. Cari berdasarkan Nama");
+
     system("pause");
     menuUtama();
 }
@@ -824,7 +868,7 @@ void formPiutang()
 
         if (strcmp(dataPiutang[recentUtang].klasifikasi, "Lancar") != 0)
         {
-            printf("Pelanggan sudah memiliki piutang\n Silahkan inputkan ulang !!\n");
+            printf("Pelanggan sudah memiliki piutang namun tidak lancar\n Silahkan inputkan ulang !!\n");
             system("pause");
             formPiutang();
         }
@@ -907,7 +951,7 @@ void formEditPelanggan()
     }
     else
     {
-        printf("NIK tidak ditemukan");
+        printf("Data tidak ditemukan\n");
     }
     system("pause");
     menuUtama();
@@ -944,7 +988,7 @@ void formDeletePiutang()
     }
     else
     {
-        printf("NIK tidak ditemukan");
+        printf("Data tidak ditemukan\n");
     }
     system("pause");
     menuUtama();
@@ -956,6 +1000,16 @@ void loadAllData()
     loadTabelTagihan();
 }
 
+void resetData()
+{
+    sizeDataPiutang = 0;
+    sizeDataTagihan = 0;
+    rewritePiutang();
+    rewriteTagihan();
+    loadAllData();
+    menuUtama();
+}
+
 void menuTagihan()
 {
     system("cls");
@@ -965,7 +1019,9 @@ void menuTagihan()
     printf("\nPilih Menu : ");
     printf("\n1. Lihat Tagihan Sudah dibayar");
     printf("\n2. Lihat Tagihan Belum dibayar");
-    printf("\n3. Bayar Tagihan");
+    printf("\n3. Cari Tagihan Belum dibayar berdasarkan NIK");
+    printf("\n4. Cari Tagihan Belum dibayar berdasarkan NAMA");
+    printf("\n5. Bayar Tagihan");
     printf("\nTekan tombol lainnya untuk keluar\n");
 
     int pilih;
@@ -973,12 +1029,18 @@ void menuTagihan()
     switch (pilih)
     {
     case 1:
-        printAllTagihan();
+        printAllTagihan(LUNAS);
         break;
     case 2:
-
+        printAllTagihan(BELUMLUNAS);
         break;
     case 3:
+        cariTagihan(NIK);
+        break;
+    case 4:
+        cariTagihan(NAMA);
+        break;
+    case 5:
         bayarPiutang();
         break;
     default:
@@ -1039,6 +1101,7 @@ void menuUtama()
     printf("\nPilih Menu : ");
     printf("\n1. Data Piutang");
     printf("\n2. Data Tagihan");
+    printf("\n3. Reset Data");
     printf("\nTekan tombol lainnya untuk keluar\n");
 
     int pilih;
@@ -1050,6 +1113,9 @@ void menuUtama()
         break;
     case 2:
         menuTagihan();
+        break;
+    case 3:
+        resetData();
         break;
     default:
         break;
