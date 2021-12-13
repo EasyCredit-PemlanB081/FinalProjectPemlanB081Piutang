@@ -574,7 +574,7 @@ void generateTagihan(Piutang p)
         tagihan.timestamp_piutang = p.timestamp;
         tagihan.timestamp_jatuhtempo = timestampJatuhTempo;
         tagihan.cicilanKe = i + 1;
-        tagihan.jumlahCicilan = p.jumlahPiutang * (100 + p.bunga) / 100 / 12;
+        tagihan.jumlahCicilan = p.jumlahPiutang * (100 + p.bunga) / 100 / p.periode;
         tagihan.flagbayar = 0;
         tagihan.piutang = p;
 
@@ -908,7 +908,7 @@ void formPiutang()
     p.tanggal = getDate(p.timestamp);
     p.jumlahPiutang = jumlahPiutang - sisaUtang;
     p.bunga = bunga;
-    p.sisaSaldo = jumlahPiutang * (100 + p.bunga) / 100 / 12 * periode;
+    p.sisaSaldo = jumlahPiutang * (100 + p.bunga) / 100;
     p.klasifikasi = "Lancar";
     p.jumlahBayar = 0;
     p.sisaCicilan = periode;
