@@ -406,12 +406,9 @@ void cetakTagihanBelumDibayarByIdPiutang(int index)
     Piutang piutang = dataPiutang[index];
     int indexStart = seachingTagihanByIDPiutang(piutang.timestamp);
     printf("Data Piutang\n");
-    printf("Pelanggan : %s\n", piutang.nama_pelanggan);
-    printf("Total Piutang : %0.f\n", piutang.jumlahPiutang);
-    printf("Sisa Piutang : %0.f\n", piutang.sisaSaldo);
-    printf("Status %s\n\n", piutang.klasifikasi);
+    printPiutang(index);
 
-    printf("=================================\n");
+    printf("\n\n=================================\n");
     for (int i = indexStart; i < indexStart + piutang.periode; i++)
     {
         if (dataTagihan[i].flagbayar == 0)
@@ -577,7 +574,7 @@ void generateTagihan(Piutang p)
         tagihan.timestamp_piutang = p.timestamp;
         tagihan.timestamp_jatuhtempo = timestampJatuhTempo;
         tagihan.cicilanKe = i + 1;
-        tagihan.jumlahCicilan = p.jumlahPiutang * (100 + p.bunga) / 100 / p.periode;
+        tagihan.jumlahCicilan = p.jumlahPiutang * (100 + p.bunga) / 100 / 12;
         tagihan.flagbayar = 0;
         tagihan.piutang = p;
 
@@ -911,7 +908,7 @@ void formPiutang()
     p.tanggal = getDate(p.timestamp);
     p.jumlahPiutang = jumlahPiutang - sisaUtang;
     p.bunga = bunga;
-    p.sisaSaldo = jumlahPiutang * (100 + p.bunga) / 100;
+    p.sisaSaldo = jumlahPiutang * (100 + p.bunga) / 100 / 12 * periode;
     p.klasifikasi = "Lancar";
     p.jumlahBayar = 0;
     p.sisaCicilan = periode;
