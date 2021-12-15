@@ -499,6 +499,7 @@ void bayarPiutang()
         rewritePiutang();
         rewriteTagihan();
         loadAllData();
+        rewritePiutang();
         system("pause");
         menuUtama();
     }
@@ -616,7 +617,7 @@ void printPiutang(int i)
     printf("Nama Pelanggan :%s\n", dataPiutang[i].nama_pelanggan);
     printf("NIK :%s\n", dataPiutang[i].nik);
     printf("Tanggal Piutang :%s\n", dataPiutang[i].tanggal);
-    printf("Diskon:%d persen\n", dataPiutang[i].jumlahPiutang);
+    printf("Diskon:%0.f persen\n", dataPiutang[i].bunga);
     printf("Jumlah Diterima :%0.f\n", dataPiutang[i].jumlahPiutang);
     printf("Jumlah Bayar :%0.f\n", dataPiutang[i].jumlahBayar);
     printf("Sisa Piutang :%0.f\n", dataPiutang[i].sisaSaldo);
