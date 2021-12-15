@@ -300,27 +300,28 @@ int searchingPiutangBelumLunasByNama(char *nama_pelanggan)
     return -1;
 }
 
-void setKlasifikasi(Piutang p, int klasifikasi)
+void setKlasifikasi(int index, int klasifikasi)
 {
+
     if (klasifikasi <= 1)
     {
-        p.klasifikasi = "Lancar";
+        dataPiutang[index].klasifikasi = "Lancar";
     }
     else if (klasifikasi <= 3)
     {
-        p.klasifikasi = "Dalam perhatian";
+        dataPiutang[index].klasifikasi = "Dalam perhatian";
     }
     else if (klasifikasi <= 5)
     {
-        p.klasifikasi = "Kurang";
+        dataPiutang[index].klasifikasi = "Kurang";
     }
     else if (klasifikasi < 7)
     {
-        p.klasifikasi = "Diragukan ";
+        dataPiutang[index].klasifikasi = "Diragukan ";
     }
     else
     {
-        p.klasifikasi = "Macet ";
+        dataPiutang[index].klasifikasi = "Macet ";
     }
 }
 
@@ -799,12 +800,14 @@ void loadTabelTagihan()
                     idpiutang++;
                     klasifikasi = 0;
                 }
-                klasifikasi++;
-
+                if (p.timestamp_jatuhtempo < getNow())
+                {
+                    klasifikasi++;
+                }
+                setKlasifikasi(idpiutang, klasifikasi);
                 p.piutang = dataPiutang[idpiutang];
                 addTagihan(p);
             }
-            // printf("%d", sizeDataTagihan);
         }
     }
     else
