@@ -19,20 +19,33 @@
 
 <h3>Data yang digunakan</h3>
 <ul>
-  <li>Menambah ...</li>
-  <li>...</li>
+  <li>NIK Pelangan</li>
+  <li>Nama Pelanggan</li>
+  <li>Tanggal Piutang Pelanggan</li>
 </ul>
     
 <h3>Metode yang digunakan</h3>
 <ul>
-  <li>...</li>
-  <li>...</li>
+  <li>Metode File OPS (File Operations)</li>
+  <li>Jumper Search</li>
 </ul>
 
 <h3>List Menu yang ditawarkan</h3>
 <ul>
-  <li>Menambah ...</li>
-  <li>...</li>
+ <li>Menampilkan data piutang</li>
+ <li>Menampilkan data tagihan</li>
+ <li>Mereset ulang data</li>
+ <li>Lihat Piutang</li>
+ <li>Tambah Data Piutang</li>
+ <li>Edit Data Pelanggan</li>
+ <li>Hapus Data Piutang</li>
+ <li>Cari Piutang Belum Lunas (Berdasarkan NIK)</li>
+ <li>Cari Piutang Belum Lunas (Berdasarkan Nama)</li>
+ <li>Lihat Tagihan Sudah Dibayar</li>
+ <li>Lihat Tagihan Belum Dibayar</li>
+ <li>Cari Tagihan Belum Dibayar (Berdasarkan NIK)</li>
+ <li>Cari Tagihan Belum Dibayar (Berdasarkan Nama)</li>
+ <li>Bayar Tagihan</li>
 </ul>
     
 <h3>Tutorial penggunaan :</h3>
@@ -42,6 +55,6 @@
   <li></li>
   <li></li>
   <li></li> 
-  <li></li>
+    <li></li>
   ...
 </ol>
