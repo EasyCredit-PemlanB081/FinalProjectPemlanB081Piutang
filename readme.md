@@ -51,7 +51,7 @@
 <h3>Tutorial penggunaan :</h3>
 <ol>
   <li>Buka Aplikasi EasyCredit</li>
-  <li></li>
+  <li>Pilih menu atau fitur pada EasyCredit</li>
   <li></li>
   <li></li>
   <li></li> 
