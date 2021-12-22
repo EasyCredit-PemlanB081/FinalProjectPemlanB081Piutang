@@ -48,8 +48,8 @@
  <li>Cari Tagihan Belum Dibayar (Berdasarkan Nama)</li>
  <li>Bayar Tagihan</li>
 </ul>
-    
-<h3>Tutorial penggunaan :</h3>
+  
+<h3>Tutorial penggunaan aplikasi :</h3>
 <ol>
   <li>Buka Aplikasi EasyCredit</li>
   <li>Pilih menu atau fitur pada EasyCredit</li>
