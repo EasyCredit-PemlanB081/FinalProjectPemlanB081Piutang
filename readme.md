@@ -28,6 +28,7 @@
 <ul>
   <li>Metode File OPS (File Operations)</li>
   <li>Jumper Search</li>
+  <li>Insertion Sort</li>
 </ul>
 
 <h3>List Menu yang ditawarkan</h3>
