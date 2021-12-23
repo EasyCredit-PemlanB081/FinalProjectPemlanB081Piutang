@@ -67,13 +67,13 @@ bagi orang yang baru menggunakan aplikasi.</p>
 
  <li>Menu Khusus 2 (Data Tagihan) memiliki menu lanjutan</li>
  <br>
- <ol>
-  <li> 1. Lihat Tagihan Sudah dibayar</li>
-  <li> 2. Lihat Tagihan Belum dibayar</li>
-  <li> 3. Cari Tagihan Belum dibayar berdasarkan NIK</li>
-  <li> 4. Cari Tagihan Belum dibayar berdasarkan NAMA</li>
-  <li> 5. Bayar Tagihan</li>
- </ol>
+
+  1. Lihat Tagihan Sudah dibayar
+  2. Lihat Tagihan Belum dibayar
+  3. Cari Tagihan Belum dibayar berdasarkan NIK
+  4. Cari Tagihan Belum dibayar berdasarkan NAMA
+  5. Bayar Tagihan
+
 
  <li>Menu Khusus 3 (Reset Data)</li>
 </ul>
