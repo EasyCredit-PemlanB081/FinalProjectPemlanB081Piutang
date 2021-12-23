@@ -59,11 +59,11 @@ bagi orang yang baru menggunakan aplikasi.</p>
  <h6><br> - 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</br></h6>
 
  <li>Menu Khusus 2 (Data Tagihan) memiliki menu lanjutan</li>
- <h6><br> - 1. Lihat Tagihan Sudah dibayar</h6>
+ <br><h6> - 1. Lihat Tagihan Sudah dibayar</h6>
  <h6> - 2. Lihat Tagihan Belum dibayar</h6>
  <h6> - 3. Cari Tagihan Belum dibayar berdasarkan NIK</h6>
  <h6> - 4. Cari Tagihan Belum dibayar berdasarkan NAMA</h6>
- <h6> - 5. Bayar Tagihan</br></h6>
+ <h6> - 5. Bayar Tagihan</h6></br>
 
  <li>Menu Khusus 3 (Reset Data)</li>
  
