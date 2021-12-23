@@ -33,13 +33,13 @@
 
 <h3>List Menu yang ditawarkan</h3>
 <ul>
- <li>Menu Khusus 1 (data piutang)</li>
- <h1> - 1. Lihat Piutang</h1>
- <h1> - 2. Tambah Piutang</h1>
- <h1> - 3. Edit Data Pelanggan</h1>
- <h1> - 4. Hapus Piutang</h1>
- <h1> - 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</h1>
- <h1> - 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</h1>
+ <li>Menu Khusus 1 (Data Piutang) memiliki menu lanjutan :</li>
+ <h7> - 1. Lihat Piutang</h7>
+ <h7> - 2. Tambah Piutang</h7>
+ <h7> - 3. Edit Data Pelanggan</h7>
+ <h7> - 4. Hapus Piutang</h7>
+ <h7> - 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</h7>
+ <h7> - 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</h7>
  <li></li>
  <li>Mereset ulang data</li>
  <li>Lihat Piutang</li>
