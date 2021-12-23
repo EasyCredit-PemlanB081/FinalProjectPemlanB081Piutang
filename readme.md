@@ -51,12 +51,12 @@ bagi orang yang baru menggunakan aplikasi.</p>
 <h3>List Menu yang ditawarkan</h3>
 <ul>
  <li>Menu Khusus 1 (Data Piutang) memiliki menu lanjutan :</li>
- <h6><br> - 1. Lihat Piutang</br></h6>
- <h6><br> - 2. Tambah Piutang</br></h6>
- <h6><br> - 3. Edit Data Pelanggan</br></h6>
- <h6><br> - 4. Hapus Piutang</br></h6>
- <h6><br> - 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</br></h6>
- <h6><br> - 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</br></h6>
+ <br><h6> - 1. Lihat Piutang</h6>
+ <h6> - 2. Tambah Piutang</h6>
+ <h6> - 3. Edit Data Pelanggan</h6>
+ <h6> - 4. Hapus Piutang</h6>
+ <h6> - 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</h6>
+ <h6> - 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</h6></br>
 
  <li>Menu Khusus 2 (Data Tagihan) memiliki menu lanjutan</li>
  <br><h6> - 1. Lihat Tagihan Sudah dibayar</h6>
