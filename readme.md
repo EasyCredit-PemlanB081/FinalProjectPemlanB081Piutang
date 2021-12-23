@@ -13,23 +13,38 @@
   <li>Silvanus Prihantono               20081010223</li> 
   <li>Ikhsanul Abbror                   20081010238</li>
 </ul>
-    
+  
+<!-- Awal Deskripsi -->
+
 <h3>Deskripsi</h3>
-<h6>Aplikasi EasyCredit Merupakan ... </h6>
+<h6>  Aplikasi EasyCredit Merupakan sebuah aplikasi yang menawarkan</h6>
+<br><h6>hutang pihutang dengan mudah menggunakan nama dan juga NIK dari</h6></br>
+<br><h6>konsumen baru maupun pelanggan lama dengan fitur yang memudahkan</h6></br>
+<br><h6>bagi orang yang baru menggunakan aplikasi.</h6></br>
+
+<!-- Akhir Deskripsi -->
+
+<!-- List Data yang digunakan -->
 
 <h3>Data yang digunakan</h3>
 <ul>
   <li>NIK Pelangan</li>
   <li>Nama Pelanggan</li>
-  <li>Tanggal Piutang Pelanggan</li>
+  <li>Jumlah Piutang</li>
 </ul>
     
+<!-- Akhir List Data yang digunakan -->
+
 <h3>Metode yang digunakan</h3>
 <ul>
   <li>Metode File OPS (File Operations)</li>
   <li>Jumper Search</li>
   <li>Insertion Sort</li>
 </ul>
+
+
+
+<!-- List menu yang ditawarkan -->
 
 <h3>List Menu yang ditawarkan</h3>
 <ul>
@@ -39,7 +54,7 @@
  <h7><br> - 3. Edit Data Pelanggan</br></h7>
  <h7><br> - 4. Hapus Piutang</br></h7>
  <h7><br> - 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</br></h7>
- <h7><br>- 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</br></h7>
+ <h7><br> - 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</br></h7>
  <li></li>
  <li>Mereset ulang data</li>
  <li>Lihat Piutang</li>
@@ -54,6 +69,8 @@
  <li>Cari Tagihan Belum Dibayar (Berdasarkan Nama)</li>
  <li>Bayar Tagihan</li>
 </ul>
+
+<!-- Akhir List menu yang ditawarkan -->
 
 <h3>Tutorial penggunaan aplikasi :</h3>
 <ol>
