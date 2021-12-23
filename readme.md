@@ -1,9 +1,7 @@
-
 <h1>EasyCredit</h1>
 
 <h3>Screenshot</h3>
 
-    
 <h3>Anggota kelompok :</h3>
 <ul>
   <li>Novandi Kevin Pratama             20081010005</li>
@@ -51,19 +49,26 @@ bagi orang yang baru menggunakan aplikasi.</p>
 <h3>List Menu yang ditawarkan</h3>
 <ul>
  <li>Menu Khusus 1 (Data Piutang) memiliki menu lanjutan :</li>
- <br><ol> 1. Lihat Piutang</ol>
- <ol> 2. Tambah Piutang</ol>
- <ol> 3. Edit Data Pelanggan</ol>
- <ol> 4. Hapus Piutang</ol>
- <ol> 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</ol>
- <ol> 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</ol></br>
+ <br>
+ <ol>
+  <li> 1. Lihat Piutang</li>
+  <li> 2. Tambah Piutang</li>
+  <li> 3. Edit Data Pelanggan</li>
+  <li> 4. Hapus Piutang</li>
+  <li> 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</li>
+  <li> 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</li>
+ </ol>
+ </br>
 
  <li>Menu Khusus 2 (Data Tagihan) memiliki menu lanjutan</li>
- <br><ol> 1. Lihat Tagihan Sudah dibayar</ol>
- <ol> 2. Lihat Tagihan Belum dibayar</ol>
- <ol> 3. Cari Tagihan Belum dibayar berdasarkan NIK</ol>
- <ol> 4. Cari Tagihan Belum dibayar berdasarkan NAMA</ol>
- <ol> 5. Bayar Tagihan</ol></br>
+ <br>
+ <ol>
+  <li> 1. Lihat Tagihan Sudah dibayar</li>
+  <li> 2. Lihat Tagihan Belum dibayar</li>
+  <li> 3. Cari Tagihan Belum dibayar berdasarkan NIK</li>
+  <li> 4. Cari Tagihan Belum dibayar berdasarkan NAMA</li>
+  <li> 5. Bayar Tagihan</li>
+ </ol>
 
  <li>Menu Khusus 3 (Reset Data)</li>
 </ul>
