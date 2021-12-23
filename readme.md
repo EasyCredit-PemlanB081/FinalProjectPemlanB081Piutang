@@ -38,8 +38,13 @@ bagi orang yang baru menggunakan aplikasi.</p>
 <h3>Metode yang digunakan</h3>
 <ul>
   <li>Metode File OPS (File Operations)</li>
-  <li>Jumper Search</li>
+  <li>Jump Search</li>
   <li>Insertion Sort</li>
+  <li>Linear search</li>
+  <li>Pointer</li>
+  <li>Struct</li>
+  <li>edit</li>
+  <li>hapus</li>
 </ul>
 
 <!-- Akhir List metode yang digunakan -->
