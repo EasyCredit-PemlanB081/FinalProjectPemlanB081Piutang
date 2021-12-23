@@ -16,7 +16,7 @@
   
 <!-- Awal Deskripsi -->
 
-<h3 style="color: blue">Deskripsi</h3>
+<h3>Deskripsi</h3>
 <p> Aplikasi EasyCredit Merupakan sebuah aplikasi yang menawarkan
 hutang pihutang dengan mudah menggunakan nama dan juga NIK dari
 konsumen baru maupun pelanggan lama dengan fitur yang memudahkan
@@ -35,6 +35,8 @@ bagi orang yang baru menggunakan aplikasi.</p>
     
 <!-- Akhir List Data yang digunakan -->
 
+<!-- List metode yang digunakan -->
+
 <h3>Metode yang digunakan</h3>
 <ul>
   <li>Metode File OPS (File Operations)</li>
@@ -42,42 +44,39 @@ bagi orang yang baru menggunakan aplikasi.</p>
   <li>Insertion Sort</li>
 </ul>
 
-
+<!-- Akhir List metode yang digunakan -->
 
 <!-- List menu yang ditawarkan -->
 
 <h3>List Menu yang ditawarkan</h3>
 <ul>
  <li>Menu Khusus 1 (Data Piutang) memiliki menu lanjutan :</li>
- <h7><br> - 1. Lihat Piutang</br></h7>
- <h7><br> - 2. Tambah Piutang</br></h7>
- <h7><br> - 3. Edit Data Pelanggan</br></h7>
- <h7><br> - 4. Hapus Piutang</br></h7>
- <h7><br> - 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</br></h7>
- <h7><br> - 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</br></h7>
- <li></li>
- <li>Mereset ulang data</li>
- <li>Lihat Piutang</li>
- <li>Tambah Data Piutang</li>
- <li>Edit Data Pelanggan</li>
- <li>Hapus Data Piutang</li>
- <li>Cari Piutang Belum Lunas (Berdasarkan NIK)</li>
- <li>Cari Piutang Belum Lunas (Berdasarkan Nama)</li>
- <li>Lihat Tagihan Sudah Dibayar</li>
- <li>Lihat Tagihan Belum Dibayar</li>
- <li>Cari Tagihan Belum Dibayar (Berdasarkan NIK)</li>
- <li>Cari Tagihan Belum Dibayar (Berdasarkan Nama)</li>
- <li>Bayar Tagihan</li>
-</ul>
+ <h6><br> - 1. Lihat Piutang</br></h6>
+ <h6><br> - 2. Tambah Piutang</br></h6>
+ <h6><br> - 3. Edit Data Pelanggan</br></h6>
+ <h6><br> - 4. Hapus Piutang</br></h6>
+ <h6><br> - 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</br></h6>
+ <h6><br> - 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</br></h6>
 
+ <li>Menu Khusus 2 (Data Tagihan) memiliki menu lanjutan</li>
+ <h6><br> - 1. Lihat Tagihan Sudah dibayar</br></h6>
+ <h6><br> - 2. Lihat Tagihan Belum dibayar</br></h6>
+ <h6><br> - 3. Cari Tagihan Belum dibayar berdasarkan NIK</br></h6>
+ <h6><br> - 4. Cari Tagihan Belum dibayar berdasarkan NAMA</br></h6>
+ <h6><br> - 5. Bayar Tagihan</br></h6>
+
+ <li>Menu Khusus 3 (Reset Data)</li>
+ 
 <!-- Akhir List menu yang ditawarkan -->
 
 <h3>Tutorial penggunaan aplikasi :</h3>
 <ol>
   <li>Buka Aplikasi EasyCredit</li>
   <li>Pilih menu atau fitur pada EasyCredit</li>
-  <li>pilih menu khusus 1 untuk menampilkan menu lanjutan(menu lanjutan tertera pada menu yang ditawarkan)</li>
-  <li>pilih menu khusus 2 untuk menampilkan menu lanjutan(menu lanjutan tertera pada menu yang ditawarkan)</li>
+  <li>pilih menu khusus 1 untuk menampilkan menu lanjutan
+  (menu lanjutan tertera pada list menu yang ditawarkan)</li>
+  <li>pilih menu khusus 2 untuk menampilkan menu lanjutan
+  (menu lanjutan tertera pada list menu yang ditawarkan)</li>
   <li>pilih menu khusus 3 untuk mereset data</li> 
     <li></li>
   ...
