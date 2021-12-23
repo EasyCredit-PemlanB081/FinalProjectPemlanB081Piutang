@@ -53,8 +53,12 @@
 <ol>
   <li>Buka Aplikasi EasyCredit</li>
   <li>Pilih menu atau fitur pada EasyCredit</li>
-  <li>Menu 1 </li>
-  <li></li>
+  <li>pilih menu khusus 1 untuk menampilkan menu lanjutan :</li>
+  <li> - 1. Lihat piutang
+ - 2. Tambah Piutang
+ - 3. Edit Data Pelanggan
+ - 4. Hapus piutang
+ - 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</li>
   <li></li> 
     <li></li>
   ...
