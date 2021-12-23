@@ -66,6 +66,7 @@ bagi orang yang baru menggunakan aplikasi.</p>
  <h6> - 5. Bayar Tagihan</h6></br>
 
  <li>Menu Khusus 3 (Reset Data)</li>
+</ul>
  
 <!-- Akhir List menu yang ditawarkan -->
 
