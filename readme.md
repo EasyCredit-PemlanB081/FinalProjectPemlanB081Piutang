@@ -33,8 +33,14 @@
 
 <h3>List Menu yang ditawarkan</h3>
 <ul>
- <li>Menampilkan data piutang</li>
- <li>Menampilkan data tagihan</li>
+ <li>Menu Khusus 1 (data piutang)</li>
+ <h1> - 1. Lihat Piutang</h1>
+ <h1> - 2. Tambah Piutang</h1>
+ <h1> - 3. Edit Data Pelanggan</h1>
+ <h1> - 4. Hapus Piutang</h1>
+ <h1> - 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</h1>
+ <h1> - 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</h1>
+ <li></li>
  <li>Mereset ulang data</li>
  <li>Lihat Piutang</li>
  <li>Tambah Data Piutang</li>
@@ -53,13 +59,9 @@
 <ol>
   <li>Buka Aplikasi EasyCredit</li>
   <li>Pilih menu atau fitur pada EasyCredit</li>
-  <li>pilih menu khusus 1 untuk menampilkan menu lanjutan :</li>
-  <li> - 1. Lihat piutang
- - 2. Tambah Piutang
- - 3. Edit Data Pelanggan
- - 4. Hapus piutang
- - 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</li>
-  <li></li> 
+  <li>pilih menu khusus 1 untuk menampilkan menu lanjutan(menu lanjutan tertera pada menu yang ditawarkan)</li>
+  <li>pilih menu khusus 2 untuk menampilkan menu lanjutan(menu lanjutan tertera pada menu yang ditawarkan)</li>
+  <li>pilih menu khusus 3 untuk mereset data</li> 
     <li></li>
   ...
 </ol>
