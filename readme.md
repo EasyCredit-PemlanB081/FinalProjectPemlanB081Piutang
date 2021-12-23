@@ -70,7 +70,7 @@ bagi orang yang baru menggunakan aplikasi.</p>
 <!-- Akhir List menu yang ditawarkan -->
 
 <h3>Tutorial penggunaan aplikasi :</h3>
-<o1>
+<ol>
   <li>Buka Aplikasi EasyCredit</li>
   <li>Pilih menu atau fitur pada EasyCredit</li>
   <li>pilih menu khusus 1 untuk menampilkan menu lanjutan
@@ -79,4 +79,4 @@ bagi orang yang baru menggunakan aplikasi.</p>
   (menu lanjutan tertera pada list menu yang ditawarkan)</li>
   <li>pilih menu khusus 3 untuk mereset data</li> 
     <li></li>
-</o1>
+</ol>
