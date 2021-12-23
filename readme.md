@@ -16,11 +16,11 @@
   
 <!-- Awal Deskripsi -->
 
-<h3>Deskripsi</h3>
-<h6>  Aplikasi EasyCredit Merupakan sebuah aplikasi yang menawarkan
+<h3 style="color: darkblue">Deskripsi</h3>
+<p>Aplikasi EasyCredit Merupakan sebuah aplikasi yang menawarkan
 hutang pihutang dengan mudah menggunakan nama dan juga NIK dari
 konsumen baru maupun pelanggan lama dengan fitur yang memudahkan
-bagi orang yang baru menggunakan aplikasi.</h6>
+bagi orang yang baru menggunakan aplikasi.</p>
 
 <!-- Akhir Deskripsi -->
 
