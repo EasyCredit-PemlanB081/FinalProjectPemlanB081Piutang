@@ -18,9 +18,9 @@
 
 <h3>Deskripsi</h3>
 <h6>  Aplikasi EasyCredit Merupakan sebuah aplikasi yang menawarkan</h6>
-<br><h6>hutang pihutang dengan mudah menggunakan nama dan juga NIK dari</h6></br>
-<br><h6>konsumen baru maupun pelanggan lama dengan fitur yang memudahkan</h6></br>
-<br><h6>bagi orang yang baru menggunakan aplikasi.</h6></br>
+<h6>hutang pihutang dengan mudah menggunakan nama dan juga NIK dari</h6>
+<h6>konsumen baru maupun pelanggan lama dengan fitur yang memudahkan</h6>
+<h6>bagi orang yang baru menggunakan aplikasi.</h6>
 
 <!-- Akhir Deskripsi -->
 
