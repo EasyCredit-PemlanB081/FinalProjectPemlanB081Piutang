@@ -360,9 +360,8 @@ void rewritePiutang()
         fprintf(fp, "%0.f", dataPiutang[i].periode);
         fprintf(fp, "%s", seperator);
         fprintf(fp, "%s", dataPiutang[i].klasifikasi);
-        fprintf(fp, "%s", enter);
+        // fprintf(fp, "%s", enter);
     }
-
     fflush(fp);
     fclose(fp);
 }
@@ -838,7 +837,6 @@ void deleteDataPiutang(int index)
     if (index < sizeDataPiutang)
     {
         int indexStart = seachingTagihanByIDPiutang(dataPiutang[index].timestamp);
-        printf("start :%d", indexStart);
         while (dataTagihan[indexStart].timestamp_piutang == dataPiutang[index].timestamp)
         {
             deleteDataTagihan(indexStart);
@@ -981,7 +979,8 @@ void formDeletePiutang()
         printf("\t\t\tNama Pelanggan :%s\n", dataPiutang[index].nama_pelanggan);
         printf("\t\t\tNIK :%s\n", dataPiutang[index].nik);
         printf("\t\t\tPiutang :%0.f\n", dataPiutang[index].jumlahPiutang);
-        printf("\t\t\tApakah anda yakin untuk menghapus tekan (1) untuk melanjutkan ? :\n");
+        fflush(stdin);
+        printf("\t\t\tApakah anda yakin untuk menghapus tekan (1) untuk melanjutkan ? : ");
         int i = 0;
         scanf("%d", &i);
         if (i == 1)
@@ -990,6 +989,8 @@ void formDeletePiutang()
             deleteDataPiutang(index);
             rewritePiutang();
         }
+        system("pause");
+        menuUtama();
     }
     else
     {
@@ -1029,7 +1030,7 @@ void menuTagihan()
     printf("\n\t\t\t5. Bayar Tagihan");
     printf("\n\t\t\t|| Tekan tombol lainnya untuk keluar ||\n");
     printf("\n\t\t\tMasukkan Pilihan : ");
-
+    fflush(stdin);
     int pilih;
     scanf("%d", &pilih);
     switch (pilih)
