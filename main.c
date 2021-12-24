@@ -406,7 +406,7 @@ void cetakTagihanBelumDibayarByIdPiutang(int index)
     system("cls");
     Piutang piutang = dataPiutang[index];
     int indexStart = seachingTagihanByIDPiutang(piutang.timestamp);
-    printf("Data Piutang\n");
+    printf("\t\t\tData Piutang\n");
     printPiutang(index);
 
     printf("\n\n=================================\n");
@@ -414,9 +414,9 @@ void cetakTagihanBelumDibayarByIdPiutang(int index)
     {
         if (dataTagihan[i].flagbayar == 0)
         {
-            printf("Cicilan ke %d\n", dataTagihan[i].cicilanKe);
-            printf("Jumlah Cicilan : %0.f\n", dataTagihan[i].jumlahCicilan);
-            printf("Jatuh tempo :%s\n\n", getDate(dataTagihan[i].timestamp_jatuhtempo));
+            printf("\t\t\tCicilan ke %d\n", dataTagihan[i].cicilanKe);
+            printf("\t\t\tJumlah Cicilan : %0.f\n", dataTagihan[i].jumlahCicilan);
+            printf("\t\t\tJatuh tempo :%s\n\n", getDate(dataTagihan[i].timestamp_jatuhtempo));
         }
     }
 }
@@ -455,10 +455,10 @@ void lunasCicilan(int index)
 void bayarPiutang()
 {
     system("cls");
-    printf("\n********************************");
-    printf("\n*  Bayar Tagihan Piutang       *");
-    printf("\n********************************\n");
-    printf("Masukkan NIK Pelanggan : ");
+    printf("\t\t\t********************************\n");
+    printf("\t\t\t***  Bayar Tagihan Piutang   ***\n");
+    printf("\t\t\t********************************\n");
+    printf("\t\t\tMasukkan NIK Pelanggan : ");
     char nik[30];
     getchar();
     gets(nik);
@@ -467,12 +467,12 @@ void bayarPiutang()
     if (index > -1)
     {
         cetakTagihanBelumDibayarByIdPiutang(index);
-        printf("\n\nPilih Metode Pembayaran");
-        printf("\n1. 1 Cicilan");
-        printf("\n2. Custom");
-        printf("\n3. Lunas");
+        printf("\n\n\t\t\tPilih Metode Pembayaran");
+        printf("\n\t\t\t1. 1 Cicilan");
+        printf("\n\t\t\t2. Custom");
+        printf("\n\t\t\t3. Lunas");
 
-        printf("\n\nPilihan : ");
+        printf("\n\n\t\t\tPilihan : ");
         int pilihan;
         scanf("%d", &pilihan);
         switch (pilihan)
@@ -481,19 +481,19 @@ void bayarPiutang()
             bayarCicilan(index, 1);
             break;
         case 2:
-            printf("\nMasukkan Jumlah Cicilan : ");
+            printf("\n\t\t\tMasukkan Jumlah Cicilan : ");
             int jumlahCicilan;
             scanf("%d", &jumlahCicilan);
             bayarCicilan(index, jumlahCicilan);
 
-            printf("\nPembayaran berhasil ...\n");
+            printf("\n\t\t\tPembayaran berhasil ...\n");
             break;
         case 3:
             lunasCicilan(index);
-            printf("\nPembayaran berhasil ...\n");
+            printf("\n\t\t\tPembayaran berhasil ...\n");
             break;
         default:
-            printf("\nPilihan tidak tersedia\n");
+            printf("\n\t\t\tPilihan tidak tersedia\n");
             break;
         }
         rewritePiutang();
@@ -505,7 +505,7 @@ void bayarPiutang()
     }
     else
     {
-        printf("\nMohon maaf, Tagihan tidak ditemukan\n");
+        printf("\n\t\t\tMohon maaf, Tagihan tidak ditemukan\n");
         system("pause");
         menuUtama();
     }
@@ -614,14 +614,14 @@ void generateTagihan(Piutang p)
 
 void printPiutang(int i)
 {
-    printf("Nama Pelanggan :%s\n", dataPiutang[i].nama_pelanggan);
-    printf("NIK :%s\n", dataPiutang[i].nik);
-    printf("Tanggal Piutang :%s\n", dataPiutang[i].tanggal);
-    printf("Diskon:%0.f persen\n", dataPiutang[i].bunga);
-    printf("Jumlah Diterima :%0.f\n", dataPiutang[i].jumlahPiutang);
-    printf("Jumlah Bayar :%0.f\n", dataPiutang[i].jumlahBayar);
-    printf("Sisa Piutang :%0.f\n", dataPiutang[i].sisaSaldo);
-    printf("Status :%s\n\n", dataPiutang[i].klasifikasi);
+    printf("\t\t\tNama Pelanggan :%s\n", dataPiutang[i].nama_pelanggan);
+    printf("\t\t\tNIK :%s\n", dataPiutang[i].nik);
+    printf("\t\t\tTanggal Piutang :%s\n", dataPiutang[i].tanggal);
+    printf("\t\t\tDiskon:%0.f persen\n", dataPiutang[i].bunga);
+    printf("\t\t\tJumlah Diterima :%0.f\n", dataPiutang[i].jumlahPiutang);
+    printf("\t\t\tJumlah Bayar :%0.f\n", dataPiutang[i].jumlahBayar);
+    printf("\t\t\tSisa Piutang :%0.f\n", dataPiutang[i].sisaSaldo);
+    printf("\t\t\tStatus :%s\n\n", dataPiutang[i].klasifikasi);
 }
 
 void cariPiutang(int column)
@@ -629,14 +629,14 @@ void cariPiutang(int column)
     system("cls");
     if (column == NAMA)
     {
-        printf("Pencarian Piutang belum lunas berdasarkan Nama\n");
+        printf("\t\t\tPencarian Piutang belum lunas berdasarkan Nama\n");
     }
     else
     {
-        printf("Pencarian Piutang belum lunas berdasarkan NIK\n");
+        printf("\t\t\tPencarian Piutang belum lunas berdasarkan NIK\n");
     }
     char keyword[30];
-    printf("Masukkan keyword pencarian : ");
+    printf("\t\t\tMasukkan keyword pencarian : ");
     scanf("%s", keyword);
     int i;
     if (column == NAMA)
@@ -654,7 +654,7 @@ void cariPiutang(int column)
     }
     else
     {
-        printf("Data tidak ditemukan\n");
+        printf("\t\t\tData tidak ditemukan\n");
     }
     system("pause");
     menuUtama();
@@ -665,14 +665,14 @@ void cariTagihan(int column)
     system("cls");
     if (column == NAMA)
     {
-        printf("Pencarian Tagihan belum lunas berdasarkan Nama\n");
+        printf("\t\t\tPencarian Tagihan belum lunas berdasarkan Nama\n");
     }
     else
     {
-        printf("Pencarian Tagihan belum lunas berdasarkan NIK\n");
+        printf("\t\t\tPencarian Tagihan belum lunas berdasarkan NIK\n");
     }
     char keyword[30];
-    printf("Masukkan keyword pencarian : ");
+    printf("\t\t\tMasukkan keyword pencarian : ");
     scanf("%s", keyword);
     int i;
     if (column == NAMA)
@@ -691,7 +691,7 @@ void cariTagihan(int column)
     }
     else
     {
-        printf("Data tidak ditemukan\n");
+        printf("\t\t\tData tidak ditemukan\n");
     }
     system("pause");
     menuUtama();
@@ -700,9 +700,9 @@ void cariTagihan(int column)
 void printAllPiutang()
 {
     system("cls");
-    printf("\n********************************");
-    printf("\n*      Daftar Piutang          *");
-    printf("\n********************************\n");
+    printf("\n\t\t\t********************************");
+    printf("\n\t\t\t***      Daftar Piutang      ***");
+    printf("\n\t\t\t********************************\n");
     int size = sizeDataPiutang;
     for (int i = 0; i < size; i++)
     {
@@ -716,18 +716,18 @@ void printAllPiutang()
 void printAllTagihan(int flag)
 {
     system("cls");
-    printf("\n********************************");
-    printf("\n*      Daftar Tagihan          *");
-    printf("\n********************************\n");
+    printf("\n\t\t\t********************************");
+    printf("\n\t\t\t***      Daftar Tagihan      ***");
+    printf("\n\t\t\t********************************\n");
     int size = sizeDataTagihan;
     for (int i = 0; i < size; i++)
     {
         if (dataTagihan[i].flagbayar == flag)
         {
-            printf("Nama Pelanggan :%s\n", dataTagihan[i].piutang.nama_pelanggan);
-            printf("Cicilan ke :%d\n", dataTagihan[i].cicilanKe);
-            printf("Jumlah :%0.f\n", dataTagihan[i].jumlahCicilan);
-            printf("Jatuh tempo :%s\n\n", dataTagihan[i].jatuhtempo);
+            printf("\t\t\tNama Pelanggan :%s\n", dataTagihan[i].piutang.nama_pelanggan);
+            printf("\t\t\tCicilan ke :%d\n", dataTagihan[i].cicilanKe);
+            printf("\t\t\tJumlah :%0.f\n", dataTagihan[i].jumlahCicilan);
+            printf("\t\t\tJatuh tempo :%s\n\n", dataTagihan[i].jatuhtempo);
         }
     }
 
@@ -852,14 +852,14 @@ void deleteDataPiutang(int index)
 void formPiutang()
 {
     system("cls");
-    printf("\n***********************************************");
-    printf("\n*                Form Piutang                 *");
-    printf("\n***********************************************");
-    printf("\nMasukkan Pelanggan : ");
+    printf("\n\t\t\t***********************************************");
+    printf("\n\t\t\t****              Form Piutang             ****");
+    printf("\n\t\t\t***********************************************");
+    printf("\n\t\t\tMasukkan Pelanggan : ");
     char nama_pelanggan[30];
     getchar();
     gets(nama_pelanggan);
-    printf("Masukkan NIK : ");
+    printf("\t\t\tMasukkan NIK : ");
     char nik[30];
     gets(nik);
     double sisaUtang = 0;
@@ -869,31 +869,31 @@ void formPiutang()
 
         if (strcmp(dataPiutang[recentUtang].klasifikasi, "Lancar") != 0)
         {
-            printf("Pelanggan sudah memiliki piutang namun tidak lancar\n Silahkan inputkan ulang !!\n");
+            printf("\t\t\tPelanggan sudah memiliki piutang namun tidak lancar\n Silahkan inputkan ulang !!\n");
             system("pause");
             formPiutang();
         }
         sisaUtang = dataPiutang[recentUtang].sisaSaldo;
     }
-    printf("Masukkan Jumlah Piutang : ");
+    printf("\t\t\tMasukkan Jumlah Piutang : ");
     double jumlahPiutang = 0;
     scanf("%lf", &jumlahPiutang);
-    printf("Masukkan Bunga : ");
+    printf("\t\t\tMasukkan Bunga : ");
     double bunga = 0;
     scanf("%lf", &bunga);
-    printf("Masukkan Berapa bulan cicilan : ");
+    printf("\t\t\tMasukkan Berapa bulan cicilan : ");
     double periode = 0;
     scanf("%lf", &periode);
 
     if (recentUtang > -1 && jumlahPiutang < sisaUtang)
     {
-        printf("Utang terbaru harus melebihi saldo piutang\n");
+        printf("\t\t\tUtang terbaru harus melebihi saldo piutang\n");
         system("pause");
         formPiutang();
     }
     else if (bunga > 100)
     {
-        printf("Bunga tidak boleh lebih dari 100\n");
+        printf("\t\t\tBunga tidak boleh lebih dari 100\n");
         system("pause");
         formPiutang();
     }
@@ -928,10 +928,10 @@ void formPiutang()
 void formEditPelanggan()
 {
     system("cls");
-    printf("\n********************************");
-    printf("\n*       Edit Profil            *");
-    printf("\n********************************");
-    printf("\nMasukkan NIK : ");
+    printf("\n\t\t\t********************************");
+    printf("\n\t\t\t***       Edit Profil        ***");
+    printf("\n\t\t\t********************************");
+    printf("\n\t\t\tMasukkan NIK : ");
     char nik[30];
     getchar();
     gets(nik);
@@ -940,19 +940,19 @@ void formEditPelanggan()
 
     if (index != -1)
     {
-        printf("Data lama :\n");
-        printf("Nama Pelanggan :%s\n", dataPiutang[index].nama_pelanggan);
-        printf("NIK :%s\n\n", dataPiutang[index].nik);
-        printf("Data Baru :\n");
-        printf("Masukkan Nama Pelanggan : ");
+        printf("\t\t\tData lama :\n");
+        printf("\t\t\tNama Pelanggan :%s\n", dataPiutang[index].nama_pelanggan);
+        printf("\t\t\tNIK :%s\n\n", dataPiutang[index].nik);
+        printf("\t\t\tData Baru :\n");
+        printf("\t\t\tMasukkan Nama Pelanggan : ");
         gets(dataPiutang[index].nama_pelanggan);
-        printf("Masukkan NIK Pelanggan : ");
+        printf("\t\t\tMasukkan NIK Pelanggan : ");
         gets(dataPiutang[index].nik);
         rewritePiutang();
     }
     else
     {
-        printf("Data tidak ditemukan\n");
+        printf("\t\t\tData tidak ditemukan\n");
     }
     system("pause");
     menuUtama();
@@ -961,10 +961,10 @@ void formEditPelanggan()
 void formDeletePiutang()
 {
     system("cls");
-    printf("\n***********************************************");
-    printf("\n*   Hapus Piutang (Akan menghapus tagihan)    *");
-    printf("\n***********************************************");
-    printf("\nMasukkan NIK : ");
+    printf("\n\t\t\t***********************************************");
+    printf("\n\t\t\t**   Hapus Piutang (Akan menghapus tagihan)  **");
+    printf("\n\t\t\t***********************************************");
+    printf("\n\t\t\tMasukkan NIK : ");
     char nik[30];
     getchar();
     gets(nik);
@@ -973,23 +973,23 @@ void formDeletePiutang()
 
     if (index != -1)
     {
-        printf("Data lama :\n");
-        printf("Nama Pelanggan :%s\n", dataPiutang[index].nama_pelanggan);
-        printf("NIK :%s\n", dataPiutang[index].nik);
-        printf("Piutang :%0.f\n", dataPiutang[index].jumlahPiutang);
-        printf("Apakah anda yakin untuk menghapus tekan (1) untuk melanjutkan ? :\n");
+        printf("\t\t\tData lama :\n");
+        printf("\t\t\tNama Pelanggan :%s\n", dataPiutang[index].nama_pelanggan);
+        printf("\t\t\tNIK :%s\n", dataPiutang[index].nik);
+        printf("\t\t\tPiutang :%0.f\n", dataPiutang[index].jumlahPiutang);
+        printf("\t\t\tApakah anda yakin untuk menghapus tekan (1) untuk melanjutkan ? :\n");
         int i = 0;
         scanf("%d", &i);
         if (i == 1)
         {
-            printf("Hapus data berhasil\n");
+            printf("\t\t\tHapus data berhasil\n");
             deleteDataPiutang(index);
             rewritePiutang();
         }
     }
     else
     {
-        printf("Data tidak ditemukan\n");
+        printf("\t\t\tData tidak ditemukan\n");
     }
     system("pause");
     menuUtama();
@@ -1014,16 +1014,17 @@ void resetData()
 void menuTagihan()
 {
     system("cls");
-    printf("\n********************************");
-    printf("\n*        Menu Tagihan          *");
-    printf("\n********************************");
-    printf("\nPilih Menu : ");
-    printf("\n1. Lihat Tagihan Sudah dibayar");
-    printf("\n2. Lihat Tagihan Belum dibayar");
-    printf("\n3. Cari Tagihan Belum dibayar berdasarkan NIK");
-    printf("\n4. Cari Tagihan Belum dibayar berdasarkan NAMA");
-    printf("\n5. Bayar Tagihan");
-    printf("\nTekan tombol lainnya untuk keluar\n");
+    printf("\n\t\t\t********************************");
+    printf("\n\t\t\t***        Menu Tagihan      ***");
+    printf("\n\t\t\t********************************");
+    printf("\n\t\t\tPilih Menu : ");
+    printf("\n\t\t\t1. Lihat Tagihan Sudah dibayar");
+    printf("\n\t\t\t2. Lihat Tagihan Belum dibayar");
+    printf("\n\t\t\t3. Cari Tagihan Belum dibayar berdasarkan NIK");
+    printf("\n\t\t\t4. Cari Tagihan Belum dibayar berdasarkan NAMA");
+    printf("\n\t\t\t5. Bayar Tagihan");
+    printf("\n\t\t\t|| Tekan tombol lainnya untuk keluar ||\n");
+    printf("\n\t\t\tMasukkan Pilihan : ");
 
     int pilih;
     scanf("%d", &pilih);
@@ -1053,38 +1054,45 @@ void menuTagihan()
 void menuPiutang()
 {
     system("cls");
-    printf("\n********************************");
-    printf("\n*        Menu Piutang          *");
-    printf("\n********************************");
-    printf("\nPilih Menu : ");
-    printf("\n1. Lihat Piutang");
-    printf("\n2. Tambah Piutang");
-    printf("\n3. Edit Data Pelanggan");
-    printf("\n4. Hapus Piutang");
-    printf("\n5. Cari Piutang Belum Lunas (Berdasarkan NIK)");
-    printf("\n6. Cari Piutang Belum Lunas (Berdasarkan Nama)");
-    printf("\nTekan tombol lainnya untuk keluar\n");
+    printf("\n\t\t\t********************************");
+    printf("\n\t\t\t***        Menu Piutang      ***");
+    printf("\n\t\t\t********************************");
+    printf("\n\t\t\tPilih Menu : ");
+    printf("\n\t\t\t1. Lihat Piutang");
+    printf("\n\t\t\t2. Tambah Piutang");
+    printf("\n\t\t\t3. Edit Data Pelanggan");
+    printf("\n\t\t\t4. Hapus Piutang");
+    printf("\n\t\t\t5. Cari Piutang Belum Lunas (Berdasarkan NIK)");
+    printf("\n\t\t\t6. Cari Piutang Belum Lunas (Berdasarkan Nama)");
+    printf("\n\t\t\t|| Tekan tombol lainnya untuk keluar ||");
+    printf("\n\t\t\tMasukkan Pilihan : ");
 
     int pilih;
     scanf("%d", &pilih);
     switch (pilih)
     {
     case 1:
+        system("cls");
         printAllPiutang();
         break;
     case 2:
+        system("cls");
         formPiutang();
         break;
     case 3:
+        system("cls");
         formEditPelanggan();
         break;
     case 4:
+        system("cls");
         formDeletePiutang();
         break;
     case 5:
+        system("cls");
         cariPiutang(NIK);
         break;
     case 6:
+        system("cls");
         cariPiutang(NAMA);
         break;
     default:
@@ -1096,15 +1104,16 @@ void menuPiutang()
 void menuUtama()
 {
     system("cls");
-    printf("\n********************************");
-    printf("\n*     Aplikasi Piutang         *");
-    printf("\n*     (Berlisensi OJK)         *");
-    printf("\n********************************");
-    printf("\nPilih Menu Khusus: ");
-    printf("\n1. Data Piutang");
-    printf("\n2. Data Tagihan");
-    printf("\n3. Reset Data");
-    printf("\nTekan tombol lainnya untuk keluar\n");
+    printf("\t\t\t********************************\n");
+    printf("\t\t\t****   Aplikasi Piutang     ****\n");
+    printf("\t\t\t***    (Berlisensi OJK)      ***\n");
+    printf("\t\t\t********************************\n");
+    printf("\t\t\tPilih Menu Khusus: \n");
+    printf("\t\t\t1. Data Piutang\n");
+    printf("\t\t\t2. Data Tagihan\n");
+    printf("\t\t\t3. Reset Data\n");
+    printf("\t\t\t0. Exit\n");
+    printf("\t\t\tMasukkan Pilihan Anda : ");
 
     int pilih;
     scanf("%d", &pilih);
@@ -1119,7 +1128,13 @@ void menuUtama()
     case 3:
         resetData();
         break;
+    case 0:
+        system("exit");
+        system("cls");
+        printf("Terima Kasih Telah Berkunjung Ke Aplikasi Kami");
+        break;
     default:
+        menuUtama();
         break;
     }
 }

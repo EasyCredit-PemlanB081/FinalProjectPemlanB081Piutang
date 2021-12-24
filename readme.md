@@ -29,6 +29,12 @@ bagi orang yang baru menggunakan aplikasi.</p>
   <li>NIK Pelangan</li>
   <li>Nama Pelanggan</li>
   <li>Jumlah Piutang</li>
+  <li>Tanggal Piutang</li>
+  <li>Diskon</li>
+  <li>Jumlah Uang Diterima oleh Pelanggan</li>
+  <li>Jumlah Uang yang dicicil Pelanggan</li>
+  <li>Sisa Piutang</li>
+  <li>Status Pembayaran</li>
 </ul>
     
 <!-- Akhir List Data yang digunakan -->
