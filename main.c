@@ -635,9 +635,10 @@ void cariPiutang(int column)
     {
         printf("\t\t\tPencarian Piutang belum lunas berdasarkan NIK\n");
     }
+    fflush(stdin);
     char keyword[30];
     printf("\t\t\tMasukkan keyword pencarian : ");
-    scanf("%s", keyword);
+    gets(keyword);
     int i;
     if (column == NAMA)
     {
@@ -671,9 +672,10 @@ void cariTagihan(int column)
     {
         printf("\t\t\tPencarian Tagihan belum lunas berdasarkan NIK\n");
     }
+    fflush(stdin);
     char keyword[30];
     printf("\t\t\tMasukkan keyword pencarian : ");
-    scanf("%s", keyword);
+    gets(keyword);
     int i;
     if (column == NAMA)
     {
