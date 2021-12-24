@@ -101,5 +101,4 @@ bagi orang yang baru menggunakan aplikasi.</p>
   <li>pilih menu khusus 2 untuk menampilkan menu lanjutan
   (menu lanjutan tertera pada list menu yang ditawarkan)</li>
   <li>pilih menu khusus 3 untuk mereset data</li> 
-    <li></li>
 </ol>
