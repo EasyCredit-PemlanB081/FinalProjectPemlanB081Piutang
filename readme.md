@@ -1,7 +1,14 @@
 <h1>EasyCredit</h1>
 
 <h3>Screenshot</h3>
-![Foto](https://raw.githubusercontent.com/EasyCredit-PemlanB081/FinalProjectPemlanB081Piutang/main/images/DaftarTagihan.png)
+<h3>Menu Utama</h3>
+<img src="https://github.com/EasyCredit-PemlanB081/FinalProjectPemlanB081Piutang/blob/main/images/menuUtama.png?raw=true" width="400px"</img> 
+<h3>Menambah Piutang</h3>
+<img src="https://github.com/EasyCredit-PemlanB081/FinalProjectPemlanB081Piutang/blob/main/images/TambahPiutang.png?raw=true" width="400px"</img> 
+<h3>Daftar Tagihan</h3>
+<img src="https://github.com/EasyCredit-PemlanB081/FinalProjectPemlanB081Piutang/blob/main/images/DaftarTagihan.png?raw=true" width="400px"</img> 
+<h3>Pembayaran Tagihan</h3>
+<img src="https://github.com/EasyCredit-PemlanB081/FinalProjectPemlanB081Piutang/blob/main/images/MenuPembayaran.png?raw=true" width="400px"</img> 
 
 <h3>Anggota kelompok :</h3>
 <ul>
