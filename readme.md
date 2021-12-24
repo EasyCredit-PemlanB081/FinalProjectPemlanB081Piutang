@@ -62,8 +62,6 @@ bagi orang yang baru menggunakan aplikasi.</p>
 <h3>List Menu yang ditawarkan</h3>
 <ul>
  <li>Menu Khusus 1 (Data Piutang) memiliki menu lanjutan :</li>
- <br>
- 
   1. Lihat Piutang
   2. Tambah Piutang
   3. Edit Data Pelanggan
@@ -74,8 +72,6 @@ bagi orang yang baru menggunakan aplikasi.</p>
  </br>
 
  <li>Menu Khusus 2 (Data Tagihan) memiliki menu lanjutan</li>
- <br>
-
   1. Lihat Tagihan Sudah dibayar
   2. Lihat Tagihan Belum dibayar
   3. Cari Tagihan Belum dibayar berdasarkan NIK
