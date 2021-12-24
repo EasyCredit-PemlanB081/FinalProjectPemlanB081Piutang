@@ -741,17 +741,19 @@ void loadTabelPiutang()
     if (isExistFile(filePiutang))
     {
         char *data = readFileText(filePiutang);
-
         //Check bila kosong
         if (data != NULL)
         {
             char *a, *c;
             for (a = strtok_r(data, enter, &c); a != NULL; a = strtok_r(NULL, enter, &c))
             {
-
                 Piutang p;
                 p.timestamp = atoi(strtok(a, seperator));
                 p.nik = strtok(NULL, seperator);
+                 if (p.nik == NULL)
+                {
+                    break;
+                }
                 p.nama_pelanggan = strtok(NULL, seperator);
                 p.tanggal = strtok(NULL, seperator);
                 p.jumlahPiutang = atof(strtok(NULL, seperator));
