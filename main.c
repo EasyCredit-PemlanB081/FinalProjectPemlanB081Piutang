@@ -20,7 +20,7 @@ const double denda = 0.1;
 
 char filePiutang[] = "piutang.data";
 char fileTagihan[] = "tagihan.data";
-
+void printPiutang(int i);
 void menuUtama();
 void loadAllData();
 //Fungsi
@@ -724,10 +724,10 @@ void printAllTagihan(int flag)
     {
         if (dataTagihan[i].flagbayar == flag)
         {
-            printf("\t\t\tNama Pelanggan :%s\n", dataTagihan[i].piutang.nama_pelanggan);
-            printf("\t\t\tCicilan ke :%d\n", dataTagihan[i].cicilanKe);
-            printf("\t\t\tJumlah :%0.f\n", dataTagihan[i].jumlahCicilan);
-            printf("\t\t\tJatuh tempo :%s\n\n", dataTagihan[i].jatuhtempo);
+            printf("Nama Pelanggan :%s\n", dataTagihan[i].piutang.nama_pelanggan);
+            printf("Cicilan ke :%d\n", dataTagihan[i].cicilanKe);
+            printf("Jumlah :%0.f\n", dataTagihan[i].jumlahCicilan);
+            printf("Jatuh tempo :%s\n\n", getDate(dataTagihan[i].timestamp_jatuhtempo));
         }
     }
 

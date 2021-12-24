@@ -1,6 +1,14 @@
 <h1>EasyCredit</h1>
 
 <h3>Screenshot</h3>
+<h3>Menu Utama</h3>
+<img src="https://github.com/EasyCredit-PemlanB081/FinalProjectPemlanB081Piutang/blob/main/images/menuUtama.png?raw=true" width="400px"</img> 
+<h3>Menambah Piutang</h3>
+<img src="https://github.com/EasyCredit-PemlanB081/FinalProjectPemlanB081Piutang/blob/main/images/TambahPiutang.png?raw=true" width="400px"</img> 
+<h3>Daftar Tagihan</h3>
+<img src="https://github.com/EasyCredit-PemlanB081/FinalProjectPemlanB081Piutang/blob/main/images/DaftarTagihan.png?raw=true" width="400px"</img> 
+<h3>Pembayaran Tagihan</h3>
+<img src="https://github.com/EasyCredit-PemlanB081/FinalProjectPemlanB081Piutang/blob/main/images/MenuPembayaran.png?raw=true" width="400px"</img> 
 
 <h3>Anggota kelompok :</h3>
 <ul>
@@ -60,20 +68,16 @@ bagi orang yang baru menggunakan aplikasi.</p>
 <h3>List Menu yang ditawarkan</h3>
 <ul>
  <li>Menu Khusus 1 (Data Piutang) memiliki menu lanjutan :</li>
- <br>
- <ol>
-  <li> 1. Lihat Piutang</li>
-  <li> 2. Tambah Piutang</li>
-  <li> 3. Edit Data Pelanggan</li>
-  <li> 4. Hapus Piutang</li>
-  <li> 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</li>
-  <li> 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</li>
- </ol>
+  1. Lihat Piutang
+  2. Tambah Piutang
+  3. Edit Data Pelanggan
+  4. Hapus Piutang
+  5. Cari Piutang Belum Lunas (Berdasarkan NIK)
+  6. Cari Piutang Belum Lunas (Berdasarkan Nama)
+ 
  </br>
 
  <li>Menu Khusus 2 (Data Tagihan) memiliki menu lanjutan</li>
- <br>
-
   1. Lihat Tagihan Sudah dibayar
   2. Lihat Tagihan Belum dibayar
   3. Cari Tagihan Belum dibayar berdasarkan NIK
