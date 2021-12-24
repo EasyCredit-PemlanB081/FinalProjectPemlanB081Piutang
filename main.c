@@ -360,7 +360,7 @@ void rewritePiutang()
         fprintf(fp, "%0.f", dataPiutang[i].periode);
         fprintf(fp, "%s", seperator);
         fprintf(fp, "%s", dataPiutang[i].klasifikasi);
-        // fprintf(fp, "%s", enter);
+        fprintf(fp, "%s", enter);
     }
     fflush(fp);
     fclose(fp);
