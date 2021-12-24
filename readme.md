@@ -55,14 +55,14 @@ bagi orang yang baru menggunakan aplikasi.</p>
 <ul>
  <li>Menu Khusus 1 (Data Piutang) memiliki menu lanjutan :</li>
  <br>
- <ol>
-  <li> 1. Lihat Piutang</li>
-  <li> 2. Tambah Piutang</li>
-  <li> 3. Edit Data Pelanggan</li>
-  <li> 4. Hapus Piutang</li>
-  <li> 5. Cari Piutang Belum Lunas (Berdasarkan NIK)</li>
-  <li> 6. Cari Piutang Belum Lunas (Berdasarkan Nama)</li>
- </ol>
+ 
+  1. Lihat Piutang
+  2. Tambah Piutang
+  3. Edit Data Pelanggan
+  4. Hapus Piutang
+  5. Cari Piutang Belum Lunas (Berdasarkan NIK)
+  6. Cari Piutang Belum Lunas (Berdasarkan Nama)
+ 
  </br>
 
  <li>Menu Khusus 2 (Data Tagihan) memiliki menu lanjutan</li>
