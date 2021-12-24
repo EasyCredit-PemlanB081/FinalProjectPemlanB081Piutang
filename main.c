@@ -807,8 +807,8 @@ void loadTabelTagihan()
                     if (idpiutang >= sizeDataPiutang)
                     {
                         //Terdapat kesalahan dalam file maka hapus data dan tulis ulang file
-                        int sizeDataPiutang = 0;
-                        int sizeDataTagihan = 0;
+                        sizeDataPiutang = 0;
+                        sizeDataTagihan = 0;
                         rewritePiutang();
                         rewriteTagihan();
                         break;
