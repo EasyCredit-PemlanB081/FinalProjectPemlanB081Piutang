@@ -1,6 +1,7 @@
 <h1>EasyCredit</h1>
 
 <h3>Screenshot</h3>
+![Foto](https://raw.githubusercontent.com/EasyCredit-PemlanB081/FinalProjectPemlanB081Piutang/main/images/DaftarTagihan.png)
 
 <h3>Anggota kelompok :</h3>
 <ul>
