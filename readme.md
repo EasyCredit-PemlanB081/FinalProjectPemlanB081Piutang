@@ -102,3 +102,49 @@ bagi orang yang baru menggunakan aplikasi.</p>
   (menu lanjutan tertera pada list menu yang ditawarkan)</li>
   <li>pilih menu khusus 3 untuk mereset data</li> 
 </ol>
+
+<h2>Rangkaian Tutorial Untuk <strong><"Menu Piutang"</strong></h2>
+  
+<h3>Tutorial Mendaftarkan Data Pengguna Terbaru :</h3>
+<ol>
+  <li>Pada tampilan menu utama pilih nomor 1</li>
+  <li>Pada tampilan menu tagihan pilih nomor 2</li>
+  <li>Masukkan detail data yang diperlukan</li>
+  <li>Ulangi tahap 1 - 3 jika ingin memasukkan pengguna yang terbaru</li>
+  <li>Selesai</li>
+  
+  <h3>Tutorial Menampilkan Data Pengguna Beserta Piutangnya :</h3>
+<ol>
+  <li>Pada tampilan menu utama pilih nomor 1</li>
+  <li>Pada tampilan menu tagihan pilih nomor 1</li>
+  <li>Selesai</li>
+  
+  <h3>Tutorial Mengubah Data Pengguna :</h3>
+<ol>
+  <li>Pada tampilan menu utama pilih nomor 1</li>
+  <li>Pada tampilan menu tagihan pilih nomor 3</li>
+  <li>Masukkan nomor NIK yang ingin dirubah</li>
+  <li>Masukkan data terbaru</li>
+  <li>Selesai</li>
+  
+  <h3>Tutorial Menghapus Data Pengguna Beserta Tagihanya :</h3>
+<ol>
+  <li>Pada tampilan menu utama pilih nomor 1</li>
+  <li>Pada tampilan menu tagihan pilih nomor 4</li>
+  <li>Masukkan nomor NIK yang ingin dirubah</li>
+  <li>Tekan nomor 1 jika ingin dihapus, sedangkan selain 1 jika ingin dibatalkan</li>
+  <li>Selesai</li>
+  
+  <h3>Tutorial Mencari Data Pengguna Beserta Tagihanya (Berdasarkan NIK) :</h3>
+<ol>
+  <li>Pada tampilan menu utama pilih nomor 1</li>
+  <li>Pada tampilan menu tagihan pilih nomor 5</li>
+  <li>Masukkan nomor NIK yang ingin ditemukan</li>
+  <li>Selesai</li>
+  
+  <h3>Tutorial Mencari Data Pengguna Beserta Tagihanya (Berdasarkan Nama) :</h3>
+<ol>
+  <li>Pada tampilan menu utama pilih nomor 1</li>
+  <li>Pada tampilan menu tagihan pilih nomor 6</li>
+  <li>Masukkan nama yang ingin ditemukan</li>
+  <li>Selesai</li>
