@@ -141,3 +141,8 @@ bagi orang yang baru menggunakan aplikasi.</p>
   <li>Masukkan nama yang ingin ditemukan</li>
   <li>Selesai</li>
  </o1>
+
+<h4>Keterangan </h4>
+  <li> Untuk rumus dari piutang : </li>
+  <li> Jumlah Piutang : Jumlah Diterima x (100 - Bunga)/100 </li>
+  <li> Jumlah Tagihan Setiao Cicilan : Jumlah Diterima x (100-Bunga)/100/Periode </li>
