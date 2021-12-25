@@ -408,7 +408,7 @@ void cetakTagihanBelumDibayarByIdPiutang(int index)
     printf("\t\t\tData Piutang\n");
     printPiutang(index);
 
-    printf("\n\n=================================\n");
+    printf("\n\n\t\t\t=================================\n");
     for (int i = indexStart; i < indexStart + piutang.periode; i++)
     {
         if (dataTagihan[i].flagbayar == 0)
@@ -725,10 +725,10 @@ void printAllTagihan(int flag)
     {
         if (dataTagihan[i].flagbayar == flag)
         {
-            printf("Nama Pelanggan :%s\n", dataTagihan[i].piutang.nama_pelanggan);
-            printf("Cicilan ke :%d\n", dataTagihan[i].cicilanKe);
-            printf("Jumlah :%0.f\n", dataTagihan[i].jumlahCicilan);
-            printf("Jatuh tempo :%s\n\n", getDate(dataTagihan[i].timestamp_jatuhtempo));
+            printf("\t\t\tNama Pelanggan :%s\n", dataTagihan[i].piutang.nama_pelanggan);
+            printf("\t\t\tCicilan ke :%d\n", dataTagihan[i].cicilanKe);
+            printf("\t\t\tJumlah :%0.f\n", dataTagihan[i].jumlahCicilan);
+            printf("\t\t\tJatuh tempo :%s\n\n", getDate(dataTagihan[i].timestamp_jatuhtempo));
         }
     }
 
@@ -922,7 +922,7 @@ void formPiutang()
     addPiutang(p, 1);
     p.jumlahPiutang = jumlahPiutang;
     generateTagihan(p);
-    printf("Data berhasil ditambah\n");
+    printf("\n\t\t\tData berhasil ditambah\n");
     system("pause");
     menuUtama();
 }
