@@ -57,8 +57,6 @@ bagi orang yang baru menggunakan aplikasi.</p>
   <li>Linear search</li>
   <li>Pointer</li>
   <li>Struct</li>
-  <li>edit</li>
-  <li>hapus</li>
 </ul>
 
 <!-- Akhir List metode yang digunakan -->

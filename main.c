@@ -751,7 +751,7 @@ void loadTabelPiutang()
                 Piutang p;
                 p.timestamp = atoi(strtok(a, seperator));
                 p.nik = strtok(NULL, seperator);
-                 if (p.nik == NULL)
+                if (p.nik == NULL)
                 {
                     break;
                 }
@@ -802,7 +802,17 @@ void loadTabelTagihan()
                 if (p.timestamp_piutang != dataPiutang[idpiutang].timestamp)
                 {
                     idpiutang++;
+
                     klasifikasi = 0;
+                    if (idpiutang >= sizeDataPiutang)
+                    {
+                        //Terdapat kesalahan dalam file maka hapus data dan tulis ulang file
+                        sizeDataPiutang = 0;
+                        sizeDataTagihan = 0;
+                        rewritePiutang();
+                        rewriteTagihan();
+                        break;
+                    }
                 }
                 if (p.timestamp_jatuhtempo < getNow())
                 {
