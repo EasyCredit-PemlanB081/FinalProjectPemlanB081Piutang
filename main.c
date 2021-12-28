@@ -803,16 +803,16 @@ void loadTabelTagihan()
                 {
                     idpiutang++;
 
-                    klasifikasi = 0;
-                    if (idpiutang >= sizeDataPiutang)
-                    {
-                        //Terdapat kesalahan dalam file maka hapus data dan tulis ulang file
-                        sizeDataPiutang = 0;
-                        sizeDataTagihan = 0;
-                        rewritePiutang();
-                        rewriteTagihan();
-                        break;
-                    }
+                    // klasifikasi = 0;
+                    // if (idpiutang >= sizeDataPiutang)
+                    // {
+                    //     //Terdapat kesalahan dalam file maka hapus data dan tulis ulang file
+                    //     sizeDataPiutang = 0;
+                    //     sizeDataTagihan = 0;
+                    //     rewritePiutang();
+                    //     rewriteTagihan();
+                    //     break;
+                    // }
                 }
                 if (p.timestamp_jatuhtempo < getNow())
                 {
@@ -849,7 +849,7 @@ void deleteDataPiutang(int index)
         int indexStart = seachingTagihanByIDPiutang(dataPiutang[index].timestamp);
         while (dataTagihan[indexStart].timestamp_piutang == dataPiutang[index].timestamp)
         {
-            deleteDataTagihan(indexStart);
+            indexStart++;
         }
         rewriteTagihan();
         for (int i = index; i < sizeDataPiutang - 1; i++)
@@ -985,13 +985,13 @@ void formDeletePiutang()
 
     if (index != -1)
     {
+        int i = 0;
         printf("\t\t\tData lama :\n");
         printf("\t\t\tNama Pelanggan :%s\n", dataPiutang[index].nama_pelanggan);
         printf("\t\t\tNIK :%s\n", dataPiutang[index].nik);
         printf("\t\t\tPiutang :%0.f\n", dataPiutang[index].jumlahPiutang);
         fflush(stdin);
         printf("\t\t\tApakah anda yakin untuk menghapus tekan (1) untuk melanjutkan ? : ");
-        int i = 0;
         scanf("%d", &i);
         if (i == 1)
         {
