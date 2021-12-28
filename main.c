@@ -832,6 +832,7 @@ void loadTabelTagihan()
 
 void deleteDataTagihan(int index)
 {
+
     if (index < sizeDataTagihan)
     {
         for (int i = index; i < sizeDataTagihan; i++)
@@ -848,8 +849,7 @@ void deleteDataPiutang(int index)
     {
         sortingTagihan(ID_PIUTANG);
         int indexStart = seachingTagihanByIDPiutang(dataPiutang[index].timestamp);
-
-        for (int i = indexStart; i < dataPiutang[index].periode; i++)
+        for (int i = indexStart; i < dataPiutang[index].periode + indexStart; i++)
         {
             deleteDataTagihan(indexStart);
         }
@@ -911,32 +911,35 @@ void formPiutang()
         system("pause");
         formPiutang();
     }
-    else if (recentUtang > -1 && jumlahPiutang >= sisaUtang)
+    else
     {
-        // Lunasi hutang sebelumnya
-        lunasCicilan(recentUtang);
-        rewritePiutang();
-        rewriteTagihan();
-    }
+        if (recentUtang > -1 && jumlahPiutang >= sisaUtang)
+        {
+            // Lunasi hutang sebelumnya
+            lunasCicilan(recentUtang);
+            rewritePiutang();
+            rewriteTagihan();
+        }
 
-    Piutang p;
-    p.timestamp = getNow();
-    p.nama_pelanggan = nama_pelanggan;
-    p.nik = nik;
-    p.tanggal = getDate(p.timestamp);
-    p.jumlahPiutang = jumlahPiutang - sisaUtang;
-    p.bunga = bunga;
-    p.sisaSaldo = jumlahPiutang * (100 + p.bunga) / 100;
-    p.klasifikasi = "Lancar";
-    p.jumlahBayar = 0;
-    p.sisaCicilan = periode;
-    p.periode = periode;
-    addPiutang(p, 1);
-    p.jumlahPiutang = jumlahPiutang;
-    generateTagihan(p);
-    printf("\n\t\t\tData berhasil ditambah\n");
-    system("pause");
-    menuUtama();
+        Piutang p;
+        p.timestamp = getNow();
+        p.nama_pelanggan = nama_pelanggan;
+        p.nik = nik;
+        p.tanggal = getDate(p.timestamp);
+        p.jumlahPiutang = jumlahPiutang - sisaUtang;
+        p.bunga = bunga;
+        p.sisaSaldo = jumlahPiutang * (100 + p.bunga) / 100;
+        p.klasifikasi = "Lancar";
+        p.jumlahBayar = 0;
+        p.sisaCicilan = periode;
+        p.periode = periode;
+        addPiutang(p, 1);
+        p.jumlahPiutang = jumlahPiutang;
+        generateTagihan(p);
+        printf("\n\t\t\tData berhasil ditambah\n");
+        system("pause");
+        menuUtama();
+    }
 }
 
 void formEditPelanggan()
@@ -997,9 +1000,10 @@ void formDeletePiutang()
         scanf("%d", &i);
         if (i == 1)
         {
-            printf("\t\t\tHapus data berhasil\n");
+
             deleteDataPiutang(index);
             rewritePiutang();
+            printf("\t\t\tHapus data berhasil\n");
         }
         system("pause");
         menuUtama();
