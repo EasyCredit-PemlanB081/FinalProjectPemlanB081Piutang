@@ -803,7 +803,7 @@ void loadTabelTagihan()
                 {
                     idpiutang++;
 
-                    // klasifikasi = 0;
+                    klasifikasi = 0;
                     // if (idpiutang >= sizeDataPiutang)
                     // {
                     //     //Terdapat kesalahan dalam file maka hapus data dan tulis ulang file
