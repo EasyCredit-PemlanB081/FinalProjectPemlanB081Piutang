@@ -12,7 +12,7 @@ const int NIK = 10;
 const int NAMA = 11;
 const int FLAG = 12;
 
-//flag Lunas
+// flag Lunas
 const int LUNAS = 1;
 const int BELUMLUNAS = 0;
 
@@ -23,7 +23,7 @@ char fileTagihan[] = "tagihan.data";
 void printPiutang(int i);
 void menuUtama();
 void loadAllData();
-//Fungsi
+// Fungsi
 int getNow()
 {
     return (int)time(NULL);
@@ -244,7 +244,7 @@ int searchingPiutangBelumLunasByNIK(char *nik)
     while (strcmp(dataPiutang[jumper].nik, nik) <= 0 && jumper < sizeDataPiutang)
     {
 
-        //proses mencari batesan lompat
+        // proses mencari batesan lompat
         prev = jumper;
         jumper += step;
         if (jumper >= sizeDataPiutang || prev == jumper)
@@ -279,7 +279,7 @@ int searchingPiutangBelumLunasByNama(char *nama_pelanggan)
     while (strcmp(dataPiutang[jumper].nama_pelanggan, nama_pelanggan) <= 0 && jumper < sizeDataPiutang)
     {
 
-        //proses mencari batesan lompat
+        // proses mencari batesan lompat
         prev = jumper;
         jumper += step;
         if (jumper >= sizeDataPiutang || prev == jumper)
@@ -742,7 +742,7 @@ void loadTabelPiutang()
     if (isExistFile(filePiutang))
     {
         char *data = readFileText(filePiutang);
-        //Check bila kosong
+        // Check bila kosong
         if (data != NULL)
         {
             char *a, *c;
@@ -781,7 +781,7 @@ void loadTabelTagihan()
     {
         char *data = readFileText(fileTagihan);
 
-        //Check bila kosong
+        // Check bila kosong
         if (data != NULL)
         {
 
@@ -834,7 +834,7 @@ void deleteDataTagihan(int index)
 {
     if (index < sizeDataTagihan)
     {
-        for (int i = index; i < sizeDataTagihan - 1; i++)
+        for (int i = index; i < sizeDataTagihan; i++)
         {
             dataTagihan[i] = dataTagihan[i + 1];
         }
@@ -846,10 +846,12 @@ void deleteDataPiutang(int index)
 {
     if (index < sizeDataPiutang)
     {
+        sortingTagihan(ID_PIUTANG);
         int indexStart = seachingTagihanByIDPiutang(dataPiutang[index].timestamp);
-        while (dataTagihan[indexStart].timestamp_piutang == dataPiutang[index].timestamp)
+
+        for (int i = indexStart; i < dataPiutang[index].periode; i++)
         {
-            indexStart++;
+            deleteDataTagihan(indexStart);
         }
         rewriteTagihan();
         for (int i = index; i < sizeDataPiutang - 1; i++)
