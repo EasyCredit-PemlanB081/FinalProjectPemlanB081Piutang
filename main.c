@@ -153,10 +153,12 @@ void cekColumnPiutang(int i, int j, int column)
 
 void sortingPiutang(int column)
 {
-    for (int i = 0; i < sizeDataPiutang; i++)
+    int i;
+    for (i = 0; i < sizeDataPiutang; i++)
     {
 
-        for (int j = i + 1; j < sizeDataPiutang; j++)
+        int j;
+        for (j = i + 1; j < sizeDataPiutang; j++)
         {
             cekColumnPiutang(i, j, column);
         }
@@ -204,10 +206,12 @@ void cekColumnTagihan(int i, int j, int column)
 
 void sortingTagihan(int column)
 {
-    for (int i = 0; i < sizeDataTagihan; i++)
+    int i;
+    for (i = 0; i < sizeDataTagihan; i++)
     {
 
-        for (int j = i + 1; j < sizeDataTagihan; j++)
+        int j;
+        for (j = i + 1; j < sizeDataTagihan; j++)
         {
             cekColumnTagihan(i, j, column);
         }
@@ -221,7 +225,8 @@ int seachingTagihanByIDPiutang(int timestamp)
         return -1;
     }
     sortingTagihan(ID_PIUTANG);
-    for (int i = 0; i < sizeDataTagihan; i++)
+    int i;
+    for (i = 0; i < sizeDataTagihan; i++)
     {
         if (dataTagihan[i].timestamp_piutang == timestamp)
         {
@@ -254,7 +259,8 @@ int searchingPiutangBelumLunasByNIK(char *nik)
     }
 
     int founded = 0;
-    for (int i = prev; i <= jumper && i < sizeDataPiutang; i++)
+    int i;
+    for (i = prev; i <= jumper && i < sizeDataPiutang; i++)
     {
 
         if (strcmp(dataPiutang[i].nik, nik) == 0 && dataPiutang[i].sisaSaldo > 0)
@@ -289,7 +295,8 @@ int searchingPiutangBelumLunasByNama(char *nama_pelanggan)
     }
 
     int founded = 0;
-    for (int i = prev; i <= jumper && i < sizeDataPiutang; i++)
+    int i;
+    for (i = prev; i <= jumper && i < sizeDataPiutang; i++)
     {
 
         if (strcmp(dataPiutang[i].nama_pelanggan, nama_pelanggan) == 0 && dataPiutang[i].sisaSaldo > 0)
@@ -337,7 +344,8 @@ void rewritePiutang()
         fp = fopen(filePiutang, "w");
     }
     int size = sizeDataPiutang;
-    for (int i = 0; i < size; i++)
+    int i;
+    for (i = 0; i < size; i++)
     {
         fprintf(fp, "%d", dataPiutang[i].timestamp);
         fprintf(fp, "%s", seperator);
@@ -378,7 +386,8 @@ void rewriteTagihan()
         fp = fopen(fileTagihan, "w");
     }
     int size = sizeDataTagihan;
-    for (int i = 0; i < size; i++)
+    int i;
+    for (i = 0; i < size; i++)
     {
         fprintf(fp, "%d", dataTagihan[i].timestamp);
         fprintf(fp, "%s", seperator);
@@ -409,7 +418,8 @@ void cetakTagihanBelumDibayarByIdPiutang(int index)
     printPiutang(index);
 
     printf("\n\n\t\t\t=================================\n");
-    for (int i = indexStart; i < indexStart + piutang.periode; i++)
+    int i;
+    for (i = indexStart; i < indexStart + piutang.periode; i++)
     {
         if (dataTagihan[i].flagbayar == 0)
         {
@@ -423,7 +433,8 @@ void cetakTagihanBelumDibayarByIdPiutang(int index)
 void bayarCicilan(int index, int jumlahCicilan)
 {
     int indexStart = seachingTagihanByIDPiutang(dataPiutang[index].timestamp);
-    for (int i = indexStart; i < indexStart + dataPiutang[index].periode && jumlahCicilan > 0; i++)
+    int i;
+    for (i = indexStart; i < indexStart + dataPiutang[index].periode && jumlahCicilan > 0; i++)
     {
         if (dataTagihan[i].flagbayar == 0)
         {
@@ -439,7 +450,8 @@ void bayarCicilan(int index, int jumlahCicilan)
 void lunasCicilan(int index)
 {
     int indexStart = seachingTagihanByIDPiutang(dataPiutang[index].timestamp);
-    for (int i = indexStart; i < indexStart + dataPiutang[index].periode; i++)
+    int i;
+    for (i = indexStart; i < indexStart + dataPiutang[index].periode; i++)
     {
         if (dataTagihan[i].flagbayar == 0)
         {
@@ -566,7 +578,8 @@ void addTagihan(Tagihan t)
 void generateTagihan(Piutang p)
 {
     int timestampJatuhTempo = p.timestamp;
-    for (int i = 0; i < p.periode; i++)
+    int i;
+    for (i = 0; i < p.periode; i++)
     {
         // Tambahkan 30 hari
         timestampJatuhTempo += (3600 * 24 * 30);
@@ -705,7 +718,8 @@ void printAllPiutang()
     printf("\n\t\t\t***      Daftar Piutang      ***");
     printf("\n\t\t\t********************************\n");
     int size = sizeDataPiutang;
-    for (int i = 0; i < size; i++)
+    int i;
+    for (i = 0; i < size; i++)
     {
         printPiutang(i);
     }
@@ -721,7 +735,8 @@ void printAllTagihan(int flag)
     printf("\n\t\t\t***      Daftar Tagihan      ***");
     printf("\n\t\t\t********************************\n");
     int size = sizeDataTagihan;
-    for (int i = 0; i < size; i++)
+    int i;
+    for (i = 0; i < size; i++)
     {
         if (dataTagihan[i].flagbayar == flag)
         {
@@ -804,16 +819,7 @@ void loadTabelTagihan()
                     idpiutang++;
 
                     klasifikasi = 0;
-                    if (idpiutang >= sizeDataPiutang)
-                    {
-                        // Terdapat kesalahan dalam file maka hapus data dan tulis ulang file
-                        sizeDataPiutang = 0;
-                        sizeDataTagihan = 0;
-                        rewritePiutang();
-                        rewriteTagihan();
-                        break;
-                    }
-                }
+                                }
                 if (p.timestamp_jatuhtempo < getNow())
                 {
                     klasifikasi++;
@@ -835,7 +841,8 @@ void deleteDataTagihan(int index)
 
     if (index < sizeDataTagihan)
     {
-        for (int i = index; i < sizeDataTagihan; i++)
+        int i;
+        for (i = index; i < sizeDataTagihan; i++)
         {
             dataTagihan[i] = dataTagihan[i + 1];
         }
@@ -849,12 +856,14 @@ void deleteDataPiutang(int index)
     {
         sortingTagihan(ID_PIUTANG);
         int indexStart = seachingTagihanByIDPiutang(dataPiutang[index].timestamp);
-        for (int i = indexStart; i < dataPiutang[index].periode + indexStart; i++)
+        int i;
+        for (i = indexStart; i < dataPiutang[index].periode + indexStart; i++)
         {
             deleteDataTagihan(indexStart);
         }
         rewriteTagihan();
-        for (int i = index; i < sizeDataPiutang - 1; i++)
+
+        for (i = index; i < sizeDataPiutang - 1; i++)
         {
             dataPiutang[i] = dataPiutang[i + 1];
         }
